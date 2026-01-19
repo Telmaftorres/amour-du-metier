@@ -72,7 +72,7 @@ function Intro({ onComplete }) {
 
         {/* Logo avec animation de flottement plus douce */}
         <motion.img 
-          src="/src/assets/logo.png" 
+          src="/logo.png" 
           alt="Kontfeel"
           className="w-200 h-200 object-contain relative z-10"
           animate={{
