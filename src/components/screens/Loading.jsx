@@ -112,12 +112,12 @@ function Loading({ onComplete }) {
         </div>
 
         {/* Titre */}
-        <h2 className="text-3xl font-bold mb-4">
+        <h2 className="text-3xl font-bold mb-8 hidden md:block">
           Analyse en cours...
         </h2>
 
         {/* Liste des étapes */}
-        <div className="space-y-6">
+        <div className="space-y-6 hidden md:block">
           {loadingSteps.map((step, index) => (
             <motion.div
               key={index}
