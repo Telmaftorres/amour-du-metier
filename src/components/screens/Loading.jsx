@@ -59,7 +59,7 @@ function Loading({ onComplete }) {
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 py-8">
       <div className="text-center max-w-2xl w-full">
         
         {/* Cercle de progression SVG - PLUS GRAND */}

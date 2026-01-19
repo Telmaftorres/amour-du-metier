@@ -10,10 +10,10 @@ function Welcome({ onStart }) {
         
         {/* Icon cœur simple et moderne */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
+          initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
-          className="flex justify-center"
+          transition={{ duration: 0.8, type: "spring" }}
+          className="mb-16 mt-12 md:mt-0"
         >
           <div className="relative">
             <motion.div

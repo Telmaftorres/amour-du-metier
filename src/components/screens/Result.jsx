@@ -144,7 +144,7 @@ function Result({ answers }) {
             onClick={() => window.open('https://kontfeel.fr/contact', '_blank')}
             variant="secondary"
           >
-            VISITER LE CŒUR DE NOTRE ATELIER
+            CONTACTEZ-NOUS POUR VOTRE PROJET
           </Button>
         </motion.div>
 
