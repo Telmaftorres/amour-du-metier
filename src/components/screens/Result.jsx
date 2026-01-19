@@ -48,7 +48,7 @@ function Result({ answers }) {
     return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
       <motion.div 
-        className="max-w-3xl text-center"
+        className="max-w-3xl text-center px-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -129,7 +129,7 @@ function Result({ answers }) {
 
         {/* Boutons CTA */}
         <motion.div 
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center px-4"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 1 }}
