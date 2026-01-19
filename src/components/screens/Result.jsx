@@ -46,9 +46,9 @@ function Result({ answers }) {
     const mainMessage = getMainMessage();
   
     return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center px-6 py-12">
       <motion.div 
-        className="max-w-3xl text-center px-6"
+        className="max-w-3xl w-full text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -71,65 +71,65 @@ function Result({ answers }) {
 
         {/* Score de compatibilité */}
         <motion.div
-        className="mb-6"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
+          className="mb-6"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
         >
-        <div className="inline-flex items-center gap-3 px-6 py-3 bg-kontfeel-pink bg-opacity-20 rounded-full border border-kontfeel-pink">
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-kontfeel-pink bg-opacity-20 rounded-full border border-kontfeel-pink">
             <span className="text-3xl font-bold text-kontfeel-pink">{compatibilityScore}%</span>
             <span className="text-lg text-gray-300">de compatibilité</span>
-        </div>
+          </div>
         </motion.div>
 
         {/* Titre principal */}
         <motion.h1 
-        className="text-5xl font-bold text-kontfeel-pink mb-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
+          className="text-4xl md:text-5xl font-bold text-kontfeel-pink mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
         >
-        {mainMessage.title}
+          {mainMessage.title}
         </motion.h1>
 
         {/* Message personnalisé selon réponse */}
         <motion.p 
-        className="text-xl text-gray-300 mb-4 italic"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
+          className="text-lg md:text-xl text-gray-300 mb-4 italic"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
         >
-        {personalizedIntro}.
+          {personalizedIntro}.
         </motion.p>
 
         {/* Intro du message principal */}
         <motion.p 
-        className="text-2xl font-semibold text-white mb-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1 }}
+          className="text-xl md:text-2xl font-semibold text-white mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1 }}
         >
-        {mainMessage.intro}
+          {mainMessage.intro}
         </motion.p>
 
         {/* Texte principal */}
         <motion.div 
-        className="text-lg text-gray-200 leading-relaxed mb-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
+          className="text-base md:text-lg text-gray-200 leading-relaxed mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
         >
-        <p className="mb-6">
+          <p className="mb-6">
             {mainMessage.body}
-        </p>
-        <p className="text-xl font-semibold text-white">
+          </p>
+          <p className="text-lg md:text-xl font-semibold text-white">
             Prêt à travailler avec des passionnés ?
-        </p>
+          </p>
         </motion.div>
 
         {/* Boutons CTA */}
         <motion.div 
-          className="flex flex-col sm:flex-row gap-4 justify-center px-4"
+          className="flex flex-col sm:flex-row gap-4 justify-center"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 1 }}

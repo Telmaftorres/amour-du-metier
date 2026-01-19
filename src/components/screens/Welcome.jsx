@@ -10,10 +10,10 @@ function Welcome({ onStart }) {
         
         {/* Icon cœur simple et moderne */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, type: "spring" }}
-          className="mb-16 mt-12 md:mt-0"
+          transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
+          className="flex justify-center mt-12 md:mt-0"
         >
           <div className="relative">
             <motion.div
@@ -65,7 +65,7 @@ function Welcome({ onStart }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="pt-8 pb-20"
+          className="pt-8 pb-20 md:pb-8"
         >
           <Button onClick={onStart}>
             LANCER LE TEST
