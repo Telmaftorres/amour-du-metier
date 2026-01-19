@@ -74,7 +74,7 @@ function Intro({ onComplete }) {
         <motion.img 
           src="/logo.png" 
           alt="Kontfeel"
-          className="w-200 h-200 object-contain relative z-10"
+          className="w-96 h-96 object-contain relative z-10"
           animate={{
             y: [0, -15, 0]
           }}
