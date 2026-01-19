@@ -65,7 +65,7 @@ function Welcome({ onStart }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="pt-8"
+          className="pt-8 pb-20"
         >
           <Button onClick={onStart}>
             LANCER LE TEST
@@ -74,14 +74,16 @@ function Welcome({ onStart }) {
 
       </div>
 
-      {/* Logo en bas */}
+      {/* Logo en bas - avec plus d'espace sur mobile */}
       <motion.div 
-        className="absolute bottom-12 text-sm text-gray-500 font-light"
+        className="absolute bottom-8 md:bottom-12 text-center w-full px-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
       >
-        Une initiative <span className="text-kontfeel-pink font-semibold">Kontfeel</span>
+        <p className="text-sm md:text-base text-gray-500 font-light">
+          Une initiative <span className="text-kontfeel-pink font-semibold">Kontfeel</span>
+        </p>
       </motion.div>
 
     </div>
