@@ -77,23 +77,6 @@ function OrigamiHeart() {
           <line x1="180" y1="100" x2="120" y2="140" stroke="#1f2732" strokeWidth="1" strokeDasharray="3,3" />
         </motion.g>
 
-        {/* Effet de brillance qui traverse */}
-        <motion.path
-          d="M80,60 L100,80 L100,160 L80,180 Z"
-          fill="white"
-          opacity="0"
-          animate={{ 
-            opacity: [0, 0.3, 0],
-            x: [0, 80, 160]
-          }}
-          transition={{ 
-            duration: 1.5, 
-            delay: 2.5,
-            ease: "easeInOut"
-          }}
-          style={{ mixBlendMode: 'overlay' }}
-        />
-
       </svg>
 
       {/* Particules légères autour */}
