@@ -112,7 +112,7 @@ function Loading({ onComplete }) {
         </div>
 
         {/* Titre */}
-        <h2 className="text-3xl font-bold mb-6 hidden md:block">
+        <h2 className="text-3xl font-bold mb-4 hidden md:block">
           Analyse en cours...
         </h2>
 
