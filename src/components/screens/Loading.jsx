@@ -62,8 +62,8 @@ function Loading({ onComplete }) {
     <div className="min-h-screen flex items-center justify-center px-4 py-12 md:py-8">
       <div className="text-center max-w-2xl w-full">
         
-        {/* Cercle de progression SVG - PLUS GRAND */}
-        <div className="flex justify-center mb-8">
+        {/* Cercle de progression SVG */}
+        <div className="flex justify-center mb-4">
           <div className="relative w-80 h-80">
             {/* SVG Circle */}
             <svg className="transform -rotate-90 w-full h-full">
