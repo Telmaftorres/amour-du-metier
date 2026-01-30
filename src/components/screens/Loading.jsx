@@ -32,7 +32,7 @@ function Loading({ onComplete }) {
     // Si on a affiché toutes les étapes ET atteint le score final
     if (currentStep >= loadingSteps.length && progress >= finalScore) {
       setTimeout(() => {
-        onComplete();
+        onComplete(finalScore);
       }, 2000);
       return;
     }

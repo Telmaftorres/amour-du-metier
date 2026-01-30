@@ -1,14 +1,8 @@
 import { motion } from 'framer-motion';
 import Button from '../ui/Button';
 
-function Result({ answers }) {
-    // Calculer un score basé sur les réponses (pour cohérence avec le loading)
-    const getCompatibilityScore = () => {
-      // Génère le même type de score que dans Loading (86-98)
-      return Math.floor(Math.random() * (98 - 86 + 1)) + 86;
-    };
-  
-    const compatibilityScore = getCompatibilityScore();
+function Result({ answers, compatibilityScore }) {
+  // Plus besoin de getCompatibilityScore, on utilise directement le prop
   
     // Récupérer une phrase personnalisée depuis les réponses
     const getPersonalizedIntro = () => {

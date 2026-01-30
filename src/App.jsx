@@ -23,7 +23,10 @@ function App() {
     setCurrentScreen('loading');
   };
 
-  const handleLoadingComplete = () => {
+  const [compatibilityScore, setCompatibilityScore] = useState(null);
+
+  const handleLoadingComplete = (score) => {
+    setCompatibilityScore(score);
     setCurrentScreen('result');
   };
 
@@ -68,7 +71,7 @@ function App() {
 
         {currentScreen === 'result' && (
           <ScreenWrapper key="result">
-            <Result answers={quizAnswers} />
+            <Result answers={quizAnswers} compatibilityScore={compatibilityScore} />
           </ScreenWrapper>
         )}
       </AnimatePresence>
