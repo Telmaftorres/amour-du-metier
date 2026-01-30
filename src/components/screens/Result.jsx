@@ -2,77 +2,79 @@ import { motion } from 'framer-motion';
 import Button from '../ui/Button';
 
 function Result({ answers, compatibilityScore }) {
-  // Plus besoin de getCompatibilityScore, on utilise directement le prop
-  
-    // Récupérer une phrase personnalisée depuis les réponses
-    const getPersonalizedIntro = () => {
-      const answerValues = Object.values(answers);
-      if (answerValues.length > 0) {
-        return answerValues[0].profile;
-      }
-      return "Vous avez du goût";
-    };
-  
-    // Message principal selon le score de compatibilité
-    const getMainMessage = () => {
-      if (compatibilityScore >= 95) {
-        return {
-          title: "COUP DE FOUDRE PROFESSIONNEL !",
-          intro: "C'est plus qu'un match, c'est une évidence.",
-          body: "Vous ne cherchez pas un simple fournisseur, vous cherchez un partenaire qui partage votre vision. Quelqu'un qui comprend que chaque détail compte, que la qualité n'est pas négociable, et que la beauté d'un projet se construit dans la passion du travail bien fait."
-        };
-      } else if (compatibilityScore >= 90) {
-        return {
-          title: "ON PARLE LE MÊME LANGAGE !",
-          intro: "C'est confirmé : nous sommes faits pour travailler ensemble.",
-          body: "Vous cherchez un partenaire qui vibre autant que vous pour donner du volume à vos idées. Vous aimez quand c'est beau, quand c'est bien pensé. Ça tombe bien. Chez Kontfeel, notre moteur, c'est l'amour du travail bien fait pour le plaisir de sublimer votre marque en magasin."
-        };
-      } else {
-        return {
-          title: "UNE EXCELLENTE COMPATIBILITÉ !",
-          intro: "Nous partageons la même exigence.",
-          body: "Vous avez l'œil pour reconnaître la qualité et vous savez que derrière chaque belle PLV se cache un vrai savoir-faire. Chez Kontfeel, nous mettons notre passion au service de vos projets pour créer des présentoirs qui ne laissent personne indifférent."
-        };
-      }
-    };
-  
-    const personalizedIntro = getPersonalizedIntro();
-    const mainMessage = getMainMessage();
-  
-    return (
+  // Récupérer une phrase personnalisée depuis les réponses
+  const getPersonalizedIntro = () => {
+    const answerValues = Object.values(answers);
+    if (answerValues.length > 0) {
+      return answerValues[0].profile;
+    }
+    return "Vous avez du goût";
+  };
+
+  // Message principal selon le score de compatibilité
+  const getMainMessage = () => {
+    if (compatibilityScore >= 95) {
+      return {
+        title: "COUP DE FOUDRE PROFESSIONNEL !",
+        intro: "C'est plus qu'un match, c'est une évidence.",
+        body: "Vous ne cherchez pas un simple fournisseur, vous cherchez un partenaire qui partage votre vision. Quelqu'un qui comprend que chaque détail compte, que la qualité n'est pas négociable, et que la beauté d'un projet se construit dans la passion du travail bien fait."
+      };
+    } else if (compatibilityScore >= 90) {
+      return {
+        title: "ON PARLE LE MÊME LANGAGE !",
+        intro: "C'est confirmé : nous sommes faits pour travailler ensemble.",
+        body: "Vous cherchez un partenaire qui vibre autant que vous pour donner du volume à vos idées. Vous aimez quand c'est beau, quand c'est bien pensé. Ça tombe bien. Chez Kontfeel, notre moteur, c'est l'amour du travail bien fait pour le plaisir de sublimer votre marque en magasin."
+      };
+    } else {
+      return {
+        title: "UNE EXCELLENTE COMPATIBILITÉ !",
+        intro: "Nous partageons la même exigence.",
+        body: "Vous avez l'œil pour reconnaître la qualité et vous savez que derrière chaque belle PLV se cache un vrai savoir-faire. Chez Kontfeel, nous mettons notre passion au service de vos projets pour créer des présentoirs qui ne laissent personne indifférent."
+      };
+    }
+  };
+
+  const personalizedIntro = getPersonalizedIntro();
+  const mainMessage = getMainMessage();
+
+  // Images des réalisations
+  const realisations = [
+    {
+      url: "https://www.kontfeel.fr/realisations-plv/arche-evenementielle-sur-mesure-pour-une-operation-de-noel",
+      image: "https://www.kontfeel.fr/_next/image?url=https%3A%2F%2Fimages.prismic.io%2Fkontfeel%2FZyoXTkoMTzYHu_Bi_arche-noel-monoprix.jpg%3Fauto%3Dformat%2Ccompress&w=1920&q=75",
+      title: "Arche événementielle Noël"
+    },
+    {
+      url: "https://www.kontfeel.fr/realisations-plv/plv-vitrine-sur-les-champs-elysees-quand-delsey-reinvente-le-voyage-chez-monoprix",
+      image: "https://www.kontfeel.fr/_next/image?url=https%3A%2F%2Fimages.prismic.io%2Fkontfeel%2FZyoXvUoMTzYHu_Bq_vitrine-delsey.jpg%3Fauto%3Dformat%2Ccompress&w=1920&q=75",
+      title: "Vitrine Delsey Champs-Élysées"
+    },
+    {
+      url: "https://www.kontfeel.fr/realisations-plv/nos-secrets-pour-une-theatralisation-de-magasin-reussie",
+      image: "https://www.kontfeel.fr/_next/image?url=https%3A%2F%2Fimages.prismic.io%2Fkontfeel%2FZyoXxkoMTzYHu_Bs_theatralisation.jpg%3Fauto%3Dformat%2Ccompress&w=1920&q=75",
+      title: "Théâtralisation de magasin"
+    }
+  ];
+
+  return (
     <div className="min-h-screen flex items-center justify-center px-6 py-12">
       <motion.div 
-        className="max-w-3xl w-full text-center"
+        className="max-w-4xl w-full text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         
-        {/* Icône de succès */}
-        <motion.div
-          className="text-4xl mb-8"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ 
-            type: "spring",
-            stiffness: 200,
-            damping: 10,
-            delay: 0.2
-          }}
-        >
-          ❤️
-        </motion.div>
-
         {/* Score de compatibilité */}
         <motion.div
-          className="mb-6"
+          className="mb-8"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-kontfeel-pink bg-opacity-20 rounded-full border border-kontfeel-pink">
-            <span className="text-3xl font-bold text-kontfeel-pink">{compatibilityScore}%</span>
-            <span className="text-lg text-gray-300">de compatibilité</span>
+          <div className="inline-flex items-center gap-3 px-8 py-4 bg-kontfeel-pink bg-opacity-20 rounded-full border-2 border-kontfeel-pink">
+            <span className="text-4xl font-bold text-kontfeel-pink">{compatibilityScore}%</span>
+            <span className="text-xl text-gray-300">de compatibilité</span>
           </div>
         </motion.div>
 
@@ -81,65 +83,110 @@ function Result({ answers, compatibilityScore }) {
           className="text-4xl md:text-5xl font-bold text-kontfeel-pink mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
         >
           {mainMessage.title}
         </motion.h1>
 
-        {/* Message personnalisé selon réponse */}
+        {/* Message personnalisé */}
         <motion.p 
           className="text-lg md:text-xl text-gray-300 mb-4 italic"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
         >
           {personalizedIntro}.
         </motion.p>
 
         {/* Intro du message principal */}
         <motion.p 
-          className="text-xl md:text-2xl font-semibold text-white mb-8"
+          className="text-xl md:text-2xl font-semibold text-white mb-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
         >
           {mainMessage.intro}
         </motion.p>
 
         {/* Texte principal */}
         <motion.div 
-          className="text-base md:text-lg text-gray-200 leading-relaxed mb-12"
+          className="text-base md:text-lg text-gray-200 leading-relaxed mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
+          transition={{ duration: 0.8, delay: 1 }}
         >
           <p className="mb-6">
             {mainMessage.body}
           </p>
-          <p className="text-lg md:text-xl font-semibold text-white">
-            Prêt à travailler avec des passionnés ?
-          </p>
         </motion.div>
 
-        {/* Boutons CTA */}
+        {/* Boutons CTA - Plus petits */}
         <motion.div 
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 1 }}
+          transition={{ duration: 0.5, delay: 1.2 }}
         >
-          <Button 
+          <button
             onClick={() => window.open('https://kontfeel.fr', '_blank')}
-            variant="primary"
+            className="px-6 py-3 bg-kontfeel-pink text-white rounded-xl font-semibold text-base hover:bg-opacity-90 transition-all"
           >
-            DÉCOUVRIR NOS CRÉATIONS EN VRAI 👀
-          </Button>
-          <Button 
+            Découvrir nos créations
+          </button>
+          <button
             onClick={() => window.open('https://kontfeel.fr/contact', '_blank')}
-            variant="secondary"
+            className="px-6 py-3 bg-kontfeel-light text-kontfeel-navy rounded-xl font-semibold text-base hover:bg-opacity-90 transition-all"
           >
-            CONTACTEZ-NOUS POUR VOTRE PROJET
-          </Button>
+            Contactez-nous
+          </button>
+        </motion.div>
+
+        {/* Séparateur */}
+        <motion.div
+          className="w-32 h-1 bg-gradient-to-r from-transparent via-kontfeel-pink to-transparent mx-auto mb-8"
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
+        />
+
+        {/* Section Réalisations */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.6 }}
+        >
+          <h3 className="text-2xl font-bold text-white mb-6">
+            Découvrez nos dernières réalisations
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {realisations.map((real, index) => (
+              <motion.a
+                key={index}
+                href={real.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden rounded-2xl aspect-square bg-gray-800"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1.8 + index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <img 
+                  src={real.image}
+                  alt={real.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-kontfeel-navy via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <p className="text-white font-semibold text-sm">
+                      {real.title}
+                    </p>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
         </motion.div>
 
         {/* Note subtile */}
@@ -147,7 +194,7 @@ function Result({ answers, compatibilityScore }) {
           className="text-sm text-gray-500 mt-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
+          transition={{ duration: 0.8, delay: 2 }}
         >
           * Spoiler : On savait qu'on était faits l'un pour l'autre dès le départ 😉
         </motion.p>

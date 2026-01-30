@@ -54,7 +54,7 @@ function Welcome({ onStart }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="pt-8 pb-28 md:pb-8"
+          className="pt-8 pb-32"
         >
           <Button onClick={onStart}>
             LANCER LE TEST
