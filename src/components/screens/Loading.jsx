@@ -12,7 +12,7 @@ function Loading({ onComplete }) {
     const randomScore = Math.floor(Math.random() * (98 - 86 + 1)) + 86;
     setFinalScore(randomScore);
   }, []);
-
+  
   useEffect(() => {
     // Animation du pourcentage qui monte progressivement
     const progressInterval = setInterval(() => {
@@ -24,28 +24,28 @@ function Loading({ onComplete }) {
         return Math.min(prev + 2, finalScore);
       });
     }, 50);
-
+  
     return () => clearInterval(progressInterval);
   }, [finalScore]);
-
+  
   useEffect(() => {
-    // Si on a affiché toutes les étapes ET atteint le score final
-    if (currentStep >= loadingSteps.length && progress >= finalScore) {
-      setTimeout(() => {
-        onComplete(finalScore);
-      }, 2000);
-      return;
+    // Synchroniser les étapes avec le pourcentage
+    const stepPercentage = finalScore / loadingSteps.length;
+    const currentStepCalculated = Math.floor(progress / stepPercentage);
+    
+    if (currentStepCalculated !== currentStep && currentStepCalculated <= loadingSteps.length) {
+      setCurrentStep(currentStepCalculated);
     }
-
-    // Passer à l'étape suivante après 800ms
-    if (currentStep < loadingSteps.length) {
+  
+    // Si on a atteint le score final, passer au résultat après 2.5s
+    if (progress >= finalScore && currentStep >= loadingSteps.length) {
       const timer = setTimeout(() => {
-        setCurrentStep(currentStep + 1);
-      }, 800);
+        onComplete(finalScore);
+      }, 2500);
       return () => clearTimeout(timer);
     }
-  }, [currentStep, progress, finalScore, onComplete]);
-
+  }, [progress, finalScore, currentStep, onComplete]);
+  
   // Messages selon le score
   const getMessage = () => {
     if (progress >= 95) return "💘 Coup de foudre professionnel !";

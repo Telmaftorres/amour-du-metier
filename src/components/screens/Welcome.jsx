@@ -82,7 +82,7 @@ function Welcome({ onStart }) {
         transition={{ duration: 1, delay: 1 }}
       >
         <p className="text-sm md:text-base text-gray-500 font-light">
-          Une initiative <span className="text-kontfeel-pink font-semibold">Kontfeel</span>
+          Une expérience <span className="text-kontfeel-pink font-semibold">Kontfeel</span>
         </p>
       </motion.div>
 
