@@ -7,8 +7,7 @@ function Welcome({ onStart }) {
     <div className="min-h-screen flex flex-col items-center justify-center px-8 relative">
       
       {/* Container principal centré */}
-      <div className="max-w-4xl w-full mx-auto text-center space-y-12">
-        
+      <div className="max-w-4xl w-full mx-auto text-center space-y-8">        
         {/* Cœur origami qui se plie */}
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}

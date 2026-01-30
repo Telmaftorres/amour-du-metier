@@ -72,15 +72,15 @@ function Result({ answers, compatibilityScore }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="inline-flex items-center gap-3 px-8 py-4 bg-kontfeel-pink bg-opacity-20 rounded-full border-2 border-kontfeel-pink">
-            <span className="text-4xl font-bold text-kontfeel-pink">{compatibilityScore}%</span>
-            <span className="text-xl text-gray-300">de compatibilité</span>
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-kontfeel-pink bg-opacity-20 rounded-full border border-kontfeel-pink">
+            <span className="text-2xl font-bold text-kontfeel-pink">{compatibilityScore}%</span>
+            <span className="text-base text-gray-300">de compatibilité</span>
           </div>
         </motion.div>
 
         {/* Titre principal */}
         <motion.h1 
-          className="text-4xl md:text-5xl font-bold text-kontfeel-pink mb-6"
+          className="text-3xl md:text-4xl font-bold text-kontfeel-pink mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -90,7 +90,7 @@ function Result({ answers, compatibilityScore }) {
 
         {/* Message personnalisé */}
         <motion.p 
-          className="text-lg md:text-xl text-gray-300 mb-4 italic"
+          className="text-base md:text-lg text-gray-300 mb-4 italic"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -100,7 +100,7 @@ function Result({ answers, compatibilityScore }) {
 
         {/* Intro du message principal */}
         <motion.p 
-          className="text-xl md:text-2xl font-semibold text-white mb-6"
+          className="text-lg md:text-xl font-semibold text-white mb-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.8 }}
@@ -110,7 +110,7 @@ function Result({ answers, compatibilityScore }) {
 
         {/* Texte principal */}
         <motion.div 
-          className="text-base md:text-lg text-gray-200 leading-relaxed mb-10"
+          className="text-sm md:text-base text-gray-200 leading-relaxed mb-10 italic"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
