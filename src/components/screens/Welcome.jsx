@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import Button from '../ui/Button';
+import OrigamiHeart from '../ui/OrigamiHeart';
 
 function Welcome({ onStart }) {
   return (
@@ -8,7 +9,7 @@ function Welcome({ onStart }) {
       {/* Container principal centré */}
       <div className="max-w-4xl w-full mx-auto text-center space-y-12">
         
-        {/* Icon cœur simple et moderne */}
+        {/* Cœur origami qui se plie */}
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -16,21 +17,9 @@ function Welcome({ onStart }) {
           className="flex justify-center mt-12 md:mt-0"
         >
           <div className="relative">
-            <motion.div
-              animate={{ 
-                scale: [1, 1.1, 1],
-              }}
-              transition={{ 
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="w-32 h-32 rounded-3xl bg-gradient-to-br from-kontfeel-pink to-pink-600 flex items-center justify-center shadow-2xl"
-            >
-              <span className="text-7xl">❤️</span>
-            </motion.div>
+            <OrigamiHeart />
             {/* Glow effect */}
-            <div className="absolute inset-0 rounded-3xl bg-kontfeel-pink opacity-30 blur-3xl -z-10"></div>
+            <div className="absolute inset-0 rounded-3xl bg-kontfeel-pink opacity-20 blur-3xl -z-10"></div>
           </div>
         </motion.div>
 
