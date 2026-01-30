@@ -37,24 +37,24 @@ function Result({ answers, compatibilityScore }) {
   const personalizedIntro = getPersonalizedIntro();
   const mainMessage = getMainMessage();
 
-  // Images des réalisations
-  const realisations = [
-    {
-      url: "https://www.kontfeel.fr/realisations-plv/arche-evenementielle-sur-mesure-pour-une-operation-de-noel",
-      image: "https://www.kontfeel.fr/_next/image?url=https%3A%2F%2Fimages.prismic.io%2Fkontfeel%2FZyoXTkoMTzYHu_Bi_arche-noel-monoprix.jpg%3Fauto%3Dformat%2Ccompress&w=1920&q=75",
-      title: "Arche événementielle Noël"
-    },
-    {
-      url: "https://www.kontfeel.fr/realisations-plv/plv-vitrine-sur-les-champs-elysees-quand-delsey-reinvente-le-voyage-chez-monoprix",
-      image: "https://www.kontfeel.fr/_next/image?url=https%3A%2F%2Fimages.prismic.io%2Fkontfeel%2FZyoXvUoMTzYHu_Bq_vitrine-delsey.jpg%3Fauto%3Dformat%2Ccompress&w=1920&q=75",
-      title: "Vitrine Delsey Champs-Élysées"
-    },
-    {
-      url: "https://www.kontfeel.fr/realisations-plv/nos-secrets-pour-une-theatralisation-de-magasin-reussie",
-      image: "https://www.kontfeel.fr/_next/image?url=https%3A%2F%2Fimages.prismic.io%2Fkontfeel%2FZyoXxkoMTzYHu_Bs_theatralisation.jpg%3Fauto%3Dformat%2Ccompress&w=1920&q=75",
-      title: "Théâtralisation de magasin"
-    }
-  ];
+// Images des réalisations
+const realisations = [
+  {
+    url: "https://www.kontfeel.fr/realisations-plv/arche-evenementielle-sur-mesure-pour-une-operation-de-noel",
+    image: "https://www.kontfeel.fr/assets/realisations/arche-evenementielle-sur-mesure.jpg",
+    title: "Arche événementielle Noël"
+  },
+  {
+    url: "https://www.kontfeel.fr/realisations-plv/plv-vitrine-sur-les-champs-elysees-quand-delsey-reinvente-le-voyage-chez-monoprix",
+    image: "https://www.kontfeel.fr/assets/realisations/plv-vitrine-sur-mesure-champs-elysees.jpg",
+    title: "Vitrine Delsey Champs-Élysées"
+  },
+  {
+    url: "https://www.kontfeel.fr/realisations-plv/nos-secrets-pour-une-theatralisation-de-magasin-reussie",
+    image: "https://www.kontfeel.fr/assets/realisations/theatralisation-magasin-avec-plv-sur-mesure.jpg",
+    title: "Théâtralisation de magasin"
+  }
+];
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-12">
