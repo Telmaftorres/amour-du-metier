@@ -16,7 +16,7 @@ export const quizQuestions = [
         },
         {
           id: "1-C",
-          text: "<strong>Le geste parfait</strong> : Une forme unique, une finition soignée, l'amour du détail invisible.",
+          text: "<strong>Le Geste Parfait</strong> : Une finition soignée, l'amour du détail.",
           profile: "Vous avez l'œil pour le détail invisible"
         }
       ]
