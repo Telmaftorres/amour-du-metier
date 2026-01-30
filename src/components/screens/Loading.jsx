@@ -45,7 +45,7 @@ function Loading({ onComplete }) {
       return () => clearTimeout(timer);
     }
   }, [progress, finalScore, currentStep, onComplete]);
-  
+
   // Messages selon le score
   const getMessage = () => {
     if (progress >= 95) return "💘 Coup de foudre professionnel !";
@@ -59,11 +59,11 @@ function Loading({ onComplete }) {
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 md:py-8">
       <div className="text-center max-w-2xl w-full">
         
         {/* Cercle de progression SVG - PLUS GRAND */}
-        <div className="flex justify-center mb-10">
+        <div className="flex justify-center mb-8">
           <div className="relative w-80 h-80">
             {/* SVG Circle */}
             <svg className="transform -rotate-90 w-full h-full">
@@ -112,7 +112,7 @@ function Loading({ onComplete }) {
         </div>
 
         {/* Titre */}
-        <h2 className="text-3xl font-bold mb-8 hidden md:block">
+        <h2 className="text-3xl font-bold mb-6 hidden md:block">
           Analyse en cours...
         </h2>
 
