@@ -40,26 +40,22 @@ function Quiz({ onComplete }) {
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
       <div className="max-w-3xl w-full">
         
-        {/* Indicateur de progression */}
+       {/* Indicateur de progression */}
         <div className="mb-12">
-        <div className="flex justify-between items-center mb-4">
-            <span className="text-sm text-gray-400">
-            Question {currentQuestion + 1} sur {quizQuestions.length}
-            </span>
+          <div className="flex justify-end items-center mb-4">
             <span className="text-sm text-kontfeel-pink font-semibold">
-            {question.step}
+              {question.step}
             </span>
-        </div>
-        <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+          </div>
+          <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
             <motion.div 
-            className="h-full bg-white rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: `${((currentQuestion + 1) / quizQuestions.length) * 100}%` }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+              className="h-full bg-white rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${((currentQuestion + 1) / quizQuestions.length) * 100}%` }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             />
+          </div>
         </div>
-        </div>
-
         {/* Question */}
         <AnimatePresence mode="wait">
           <motion.div
