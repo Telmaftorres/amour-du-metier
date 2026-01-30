@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import Intro from './components/screens/Intro';
 import Welcome from './components/screens/Welcome';
 import Quiz from './components/screens/Quiz';
 import Loading from './components/screens/Loading';
 import Result from './components/screens/Result';
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState('intro');
+  const [currentScreen, setCurrentScreen] = useState('welcome');
   const [quizAnswers, setQuizAnswers] = useState(null);
-
-  const handleIntroComplete = () => {
-    setCurrentScreen('welcome');
-  };
 
   const handleStart = () => {
     setCurrentScreen('quiz');
@@ -45,12 +40,6 @@ function App() {
   return (
     <div className="min-h-screen">
       <AnimatePresence mode="wait">
-        {currentScreen === 'intro' && (
-          <ScreenWrapper key="intro">
-            <Intro onComplete={handleIntroComplete} />
-          </ScreenWrapper>
-        )}
-
         {currentScreen === 'welcome' && (
           <ScreenWrapper key="welcome">
             <Welcome onStart={handleStart} />
