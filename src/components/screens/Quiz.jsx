@@ -93,7 +93,7 @@ function Quiz({ onComplete }) {
             transition={{ duration: 0.3 }}
           >
             <h2 className="text-3xl font-bold mb-8">
-              {question.question}
+              dangerouslySetInnerHTML={{ __html: question.question }}
             </h2>
 
             {/* Réponses */}
