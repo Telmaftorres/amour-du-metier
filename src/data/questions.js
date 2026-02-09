@@ -2,7 +2,7 @@ export const quizQuestions = [
     {
       id: 1,
       step: "ÉTAPE 1 : L'EXIGENCE",
-      question: "Pour vous, la vraie beauté d'un présentoir se cache dans...",
+      question: "Pour vous, la vraie <span class='text-kontfeel-pink'>beauté d'un présentoir</span> se cache dans...",
       answers: [
         {
           id: "1-A",
@@ -16,7 +16,7 @@ export const quizQuestions = [
         },
         {
           id: "1-C",
-          text: "<strong>Le Geste Parfait</strong> : Une finition soignée, l'amour du détail.",
+          text: "<strong>Le geste parfait</strong> : Une finition soignée, l'amour du détail.",
           profile: "Vous avez l'œil pour le détail invisible"
         }
       ]
@@ -24,7 +24,7 @@ export const quizQuestions = [
     {
       id: 2,
       step: "ÉTAPE 2 : LE RESSENTI",
-      question: "Devant une PLV particulièrement réussie, votre premier réflexe c'est...",
+      question: "Devant une <span class='text-kontfeel-pink'>PLV particulièrement réussie</span>, votre premier réflexe c'est...",
       answers: [
         {
           id: "2-A",
@@ -46,7 +46,7 @@ export const quizQuestions = [
     {
       id: 3,
       step: "ÉTAPE 3 : LA RÉCOMPENSE ULTIME",
-      question: "Ce qui vous rend le plus fier à la fin d'un projet, c'est...",
+      question: "Ce qui vous rend le plus <span class='text-kontfeel-pink'>fier à la fin d'un projet</span>, c'est...",
       answers: [
         {
           id: "3-A",
