@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { quizQuestions } from '../../data/questions';
 import Button from '../ui/Button';
 import Logo from '../ui/Logo';
+import HeartCursor from '../ui/HeartCursor';
 
 function Quiz({ onComplete }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -11,6 +12,8 @@ function Quiz({ onComplete }) {
   const question = quizQuestions[currentQuestion];
   const isLastQuestion = currentQuestion === quizQuestions.length - 1;
   const hasAnswer = answers[question.id] !== undefined;
+  const progress = quizQuestions.length <= 1 ? 1 : currentQuestion / (quizQuestions.length - 1);
+
 
   // Quand on sélectionne une réponse
   const handleSelectAnswer = (answerId, profile) => {
@@ -38,7 +41,8 @@ function Quiz({ onComplete }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 cursor-none">
+      <HeartCursor progress={progress} />
       <div className="max-w-3xl w-full">
 
         {/* Logo Kontfeel discret */}
