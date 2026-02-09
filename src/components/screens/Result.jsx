@@ -117,8 +117,18 @@ function Result({ answers, compatibilityScore }) {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <div className="bg-gray-800 bg-opacity-30 backdrop-blur-sm rounded-3xl p-6 border border-gray-700">
-                <p className="text-sm md:text-base text-gray-200 leading-relaxed italic">
-                  {mainMessage}
+                <p className="text-sm md:text-base text-gray-200 leading-relaxed">
+                  {mainMessage.split('. ').map((sentence, index) => (
+                    <span key={index}>
+                      {sentence.trim()}{sentence.trim() && '.'}
+                      {index < mainMessage.split('. ').length - 1 && (
+                        <>
+                          <br />
+                          <br />
+                        </>
+                      )}
+                    </span>
+                  ))}
                 </p>
               </div>
             </motion.div>
@@ -189,6 +199,7 @@ function Result({ answers, compatibilityScore }) {
             </h2>
 
             {!isSubmitted ? (
+            <>
               <form onSubmit={handleSubmit} className="space-y-3">
                 <input
                   type="text"
@@ -236,24 +247,39 @@ function Result({ answers, compatibilityScore }) {
                   {isSubmitting ? 'Envoi en cours...' : 'Envoyer'}
                 </button>
               </form>
-            ) : (
+
+              {/* Logo Kontfeel centré sous le bouton */}
               <motion.div
-                className="text-center py-8"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
+                className="flex justify-center mt-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.6 }}
+                transition={{ duration: 0.8, delay: 1 }}
               >
-                <div className="text-5xl mb-3">🎉</div>
-                <h3 className="text-xl font-bold text-kontfeel-pink mb-2">
-                  Message reçu !
-                </h3>
-                <p className="text-gray-300 text-sm mb-1">
-                  On adore déjà votre projet !
-                </p>
-                <p className="text-gray-400 text-xs">
-                  Notre équipe vous contactera plus vite qu'un découpage laser. 🚀
-                </p>
+                <img 
+                  src="/logo.png" 
+                  alt="Kontfeel"
+                  className="h-12 w-auto opacity-70"
+                />
               </motion.div>
-            )}
+            </>
+          ) : (
+            <motion.div
+              className="text-center py-8"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+            >
+              <div className="text-5xl mb-3">🎉</div>
+              <h3 className="text-xl font-bold text-kontfeel-pink mb-2">
+                Message reçu !
+              </h3>
+              <p className="text-gray-300 text-sm mb-1">
+                On adore déjà votre projet !
+              </p>
+              <p className="text-gray-400 text-xs">
+                Notre équipe vous contactera plus vite qu'un découpage laser. 🚀
+              </p>
+            </motion.div>
+          )}
           </motion.div>
 
         </div>
