@@ -9,7 +9,7 @@ function OrigamiHeart() {
       <motion.img
         src={heartImg}
         alt="Cœur Kontfeel"
-        className="w-64 h-64 object-contain"
+        className="w-64 h-64 md:w-80 md:h-80 object-contain relative z-10"
         animate={{
           scale: [1, 1.1, 1],
         }}
