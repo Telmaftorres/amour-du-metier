@@ -92,9 +92,11 @@ function Quiz({ onComplete }) {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <h2 className="text-3xl font-bold mb-8">
+            <h2
+              className="text-3xl font-bold mb-8"
               dangerouslySetInnerHTML={{ __html: question.question }}
-            </h2>
+            />
+
 
             {/* Réponses */}
             <div className="space-y-4 mb-8">
