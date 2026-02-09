@@ -6,9 +6,6 @@ import ExperienceFooter from "../ui/ExperienceFooter";
 function Welcome({ onStart }) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-8 relative">
-      
-      {/* Logo Kontfeel discret en haut à gauche */}
-      <Logo withHover={true} />
 
       {/* Container principal centré */}
       <div className="max-w-4xl w-full mx-auto text-center space-y-6">

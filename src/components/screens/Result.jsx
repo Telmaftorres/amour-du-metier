@@ -77,9 +77,7 @@ function Result({ answers, compatibilityScore }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-4 md:py-2 relative">
-      <Logo />
-      
+    <div className="min-h-screen flex items-center justify-center px-6 py-4 md:py-2 relative">   
       <motion.div 
         className="max-w-7xl w-full"
         initial={{ opacity: 0, y: 20 }}
