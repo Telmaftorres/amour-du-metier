@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { quizQuestions } from '../../data/questions';
 import Button from '../ui/Button';
-import Logo from '../ui/Logo';
+import ExperienceFooter from "../ui/ExperienceFooter";
+
 
 function Quiz({ onComplete }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);

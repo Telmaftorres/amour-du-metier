@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { loadingSteps } from '../../data/questions';
-import Logo from '../ui/Logo';
+import ExperienceFooter from "../ui/ExperienceFooter";
 
 function Loading({ onComplete }) {
   const [currentStep, setCurrentStep] = useState(0);

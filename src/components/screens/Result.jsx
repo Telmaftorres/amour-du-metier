@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import Logo from '../ui/Logo';
+import ExperienceFooter from "../ui/ExperienceFooter";
+
 
 function Result({ answers, compatibilityScore }) {
   const [formData, setFormData] = useState({
