@@ -14,7 +14,7 @@ function ExperienceFooter() {
         <img 
           src={logoImg}
           alt="Kontfeel"
-          className="h-5 md:h-6 w-auto inline-block"
+          className="h-10 md:h-12 w-auto inline-block opacity-80"
         />
       </p>
     </motion.div>
