@@ -39,6 +39,20 @@ function Quiz({ onComplete }) {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
       <div className="max-w-3xl w-full">
+
+        {/* Logo Kontfeel discret */}
+        <motion.div 
+          className="absolute top-6 left-6 z-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.7 }}
+          transition={{ duration: 0.8 }}
+        >
+          <img 
+            src="/logo.png" 
+            alt="Kontfeel"
+            className="h-10 w-auto opacity-80"
+          />
+        </motion.div>
         
        {/* Indicateur de progression */}
         <div className="mb-12">

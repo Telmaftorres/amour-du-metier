@@ -63,6 +63,19 @@ function Result({ answers, compatibilityScore }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
+        {/* Logo Kontfeel discret */}
+        <motion.div 
+          className="absolute top-6 left-6 z-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.7 }}
+          transition={{ duration: 0.8 }}
+        >
+          <img 
+            src="/logo.png" 
+            alt="Kontfeel"
+            className="h-10 w-auto opacity-80"
+          />
+        </motion.div>
         
         {/* Score de compatibilité */}
         <motion.div
