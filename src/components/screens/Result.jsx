@@ -87,9 +87,9 @@ function Result({ answers, compatibilityScore }) {
         transition={{ duration: 0.8 }}
       >
         
-        {/* Titre avec pourcentage - Plus compact */}
+        {/* Titre avec pourcentage - Plus d'espace en haut */}
         <motion.div
-          className="text-center mb-8"
+          className="text-center mb-10 mt-8"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -104,24 +104,80 @@ function Result({ answers, compatibilityScore }) {
           </p>
         </motion.div>
 
-        {/* Section principale : Texte à gauche, Formulaire à droite */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        {/* Section principale : Texte + Réalisations à gauche, Formulaire à droite */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
-          {/* TEXTE DESCRIPTIF */}
-          <motion.div
-            className="flex items-center"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <div className="bg-gray-800 bg-opacity-30 backdrop-blur-sm rounded-3xl p-8 border border-gray-700">
-              <p className="text-base md:text-lg text-gray-200 leading-relaxed italic">
-                {mainMessage}
-              </p>
-            </div>
-          </motion.div>
+          {/* COLONNE GAUCHE : Texte + Réalisations */}
+          <div className="space-y-6">
+            
+            {/* TEXTE DESCRIPTIF */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <div className="bg-gray-800 bg-opacity-30 backdrop-blur-sm rounded-3xl p-6 border border-gray-700">
+                <p className="text-sm md:text-base text-gray-200 leading-relaxed italic">
+                  {mainMessage}
+                </p>
+              </div>
+            </motion.div>
 
-          {/* FORMULAIRE DE CONTACT */}
+            {/* RÉALISATIONS - 2 petites */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <h3 className="text-lg font-bold text-white mb-3">
+                Découvrez notre savoir-faire
+              </h3>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {selectedRealizations.map((real, index) => (
+                  <motion.a
+                    key={index}
+                    href={real.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative block overflow-hidden rounded-2xl aspect-square bg-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <img 
+                      src={real.image}
+                      alt={real.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-kontfeel-navy via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-3">
+                        <p className="text-white font-semibold text-xs">
+                          {real.title}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+
+              <p className="text-center text-gray-400 text-xs mt-3">
+                Plus de réalisations sur{' '}
+                <a 
+                  href="https://kontfeel.fr/realisations-plv" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-kontfeel-pink hover:underline"
+                >
+                  kontfeel.fr
+                </a>
+              </p>
+            </motion.div>
+
+          </div>
+
+          {/* COLONNE DROITE : FORMULAIRE DE CONTACT */}
           <motion.div
             className="bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-3xl p-8 border border-gray-700"
             initial={{ opacity: 0, x: 50 }}
@@ -201,58 +257,6 @@ function Result({ answers, compatibilityScore }) {
           </motion.div>
 
         </div>
-
-        {/* RÉALISATIONS - 2 petites en bas */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <h3 className="text-xl font-bold text-white text-center mb-4">
-            Découvrez notre savoir-faire
-          </h3>
-          
-          <div className="grid grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {selectedRealizations.map((real, index) => (
-              <motion.a
-                key={index}
-                href={real.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative block overflow-hidden rounded-2xl aspect-square bg-gray-800"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <img 
-                  src={real.image}
-                  alt={real.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-kontfeel-navy via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="text-white font-semibold text-sm">
-                      {real.title}
-                    </p>
-                  </div>
-                </div>
-              </motion.a>
-            ))}
-          </div>
-
-          <p className="text-center text-gray-400 text-xs mt-3">
-            Plus de réalisations sur{' '}
-            <a 
-              href="https://kontfeel.fr/realisations-plv" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-kontfeel-pink hover:underline"
-            >
-              kontfeel.fr
-            </a>
-          </p>
-        </motion.div>
 
       </motion.div>
     </div>
