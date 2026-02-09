@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Button from '../ui/Button';
 import OrigamiHeart from '../ui/OrigamiHeart';
-import Logo from '../ui/Logo';
+import ExperienceFooter from "../ui/ExperienceFooter";
 
 function Welcome({ onStart }) {
   return (
@@ -66,19 +66,8 @@ function Welcome({ onStart }) {
         </motion.div>
 
       </div>
-
-      {/* Logo en bas - avec plus d'espace sur mobile */}
-      <motion.div 
-        className="absolute bottom-8 md:bottom-12 text-center w-full px-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-      >
-        <p className="text-sm md:text-base text-gray-500 font-light">
-          Une expérience <span className="text-kontfeel-pink font-semibold">Kontfeel</span>
-        </p>
-      </motion.div>
-
+      {/* Logo en bas */}
+      <ExperienceFooter />
     </div>
   );
 }

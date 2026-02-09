@@ -38,12 +38,8 @@ function Quiz({ onComplete }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 cursor-none">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12">
       <div className="max-w-3xl w-full">
-
-        {/* Logo Kontfeel discret */}
-        <Logo />
-        
        {/* Indicateur de progression */}
         <div className="mb-12">
           <div className="flex justify-end items-center mb-4">
@@ -152,6 +148,8 @@ function Quiz({ onComplete }) {
         </div>
 
       </div>
+       {/* Logo en bas */}
+       <ExperienceFooter />
     </div>
   );
 }

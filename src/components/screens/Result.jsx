@@ -247,21 +247,8 @@ function Result({ answers, compatibilityScore }) {
                   {isSubmitting ? 'Envoi en cours...' : 'Envoyer'}
                 </button>
               </form>
-
-              {/* Logo Kontfeel centré sous le bouton */}
-              <motion.div
-                className="flex justify-center mt-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.6 }}
-                transition={{ duration: 0.8, delay: 1 }}
-              >
-                <img 
-                  src="/logo.png" 
-                  alt="Kontfeel"
-                  className="h-16 md:h-20 w-auto opacity-80"
-
-                />
-              </motion.div>
+               {/* Logo en bas */}
+              <ExperienceFooter />
             </>
           ) : (
             <motion.div
@@ -277,7 +264,7 @@ function Result({ answers, compatibilityScore }) {
                 On adore déjà votre projet !
               </p>
               <p className="text-gray-400 text-xs">
-                Notre équipe vous contactera plus vite qu'un découpage laser. 🚀
+                Notre équipe vous contactera plus vite qu'un découpage laser. 
               </p>
             </motion.div>
           )}

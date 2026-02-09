@@ -157,6 +157,8 @@ function Loading({ onComplete }) {
         )}
 
       </div>
+       {/* Logo en bas */}
+       <ExperienceFooter />
     </div>
   );
 }
