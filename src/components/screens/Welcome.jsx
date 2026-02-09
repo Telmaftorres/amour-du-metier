@@ -1,25 +1,15 @@
 import { motion } from 'framer-motion';
 import Button from '../ui/Button';
 import OrigamiHeart from '../ui/OrigamiHeart';
+import Logo from '../ui/Logo';
 
 function Welcome({ onStart }) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-8 relative">
       
       {/* Logo Kontfeel discret en haut à gauche */}
-      <motion.div 
-        className="absolute top-6 left-6 z-10"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 0.7, x: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <img 
-          src="/logo.png" 
-          alt="Kontfeel"
-          className="h-10 w-auto opacity-80 hover:opacity-100 transition-opacity"
-        />
-      </motion.div>
-      
+      <Logo withHover={true} />
+
       {/* Container principal centré */}
       <div className="max-w-4xl w-full mx-auto text-center space-y-6">
         

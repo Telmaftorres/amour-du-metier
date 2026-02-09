@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { quizQuestions } from '../../data/questions';
 import Button from '../ui/Button';
+import Logo from '../ui/Logo';
 
 function Quiz({ onComplete }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -41,18 +42,7 @@ function Quiz({ onComplete }) {
       <div className="max-w-3xl w-full">
 
         {/* Logo Kontfeel discret */}
-        <motion.div 
-          className="absolute top-6 left-6 z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.7 }}
-          transition={{ duration: 0.8 }}
-        >
-          <img 
-            src="/logo.png" 
-            alt="Kontfeel"
-            className="h-10 w-auto opacity-80"
-          />
-        </motion.div>
+        <Logo />
         
        {/* Indicateur de progression */}
         <div className="mb-12">
