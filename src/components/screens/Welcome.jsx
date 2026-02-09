@@ -54,7 +54,7 @@ function Welcome({ onStart }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="pt-6 pb-20 md:pb-8"
+          className="pt-6 pb-32"
         >
           <Button onClick={onStart}>
             LANCER LE TEST
@@ -71,7 +71,7 @@ function Welcome({ onStart }) {
         transition={{ duration: 1, delay: 1 }}
       >
         <p className="text-sm md:text-base text-gray-500 font-light">
-          Une initiative <span className="text-kontfeel-pink font-semibold">Kontfeel</span>
+          Une expérience <span className="text-kontfeel-pink font-semibold">Kontfeel</span>
         </p>
       </motion.div>
 
