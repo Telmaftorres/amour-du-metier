@@ -51,11 +51,11 @@ function Quiz({ onComplete }) {
               {question.step}
             </span>
           </div>
-          {/* BARRE DE PROGRESSION + COEUR */}
-        <div className="relative">
+          {/* BARRE DE PROGRESSION + COEUR intégré */}
+        <div className="relative h-8 flex items-center">
           {/* Barre grise */}
-          <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-            {/* Barre blanche qui avance */}
+          <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
+            {/* Barre blanche */}
             <motion.div
               className="h-full bg-white rounded-full"
               initial={{ width: 0 }}
@@ -64,30 +64,27 @@ function Quiz({ onComplete }) {
             />
           </div>
 
-          {/* Coeur qui suit la progression et grossit */}
+          {/* Coeur centré EXACTEMENT sur l'axe de la barre */}
           <motion.div
-            className="absolute top-1/2 -translate-y-1/2"
-            // Position du coeur : on le place à "progress%" de la barre
+            className="absolute left-0 top-1/2 -translate-y-1/2"
             style={{
-              left: `calc(${((currentQuestion + 1) / quizQuestions.length) * 100}% - 12px)`
+              transform: `translateX(calc(${((currentQuestion + 1) / quizQuestions.length) * 100}% - 50%)) translateY(-50%)`
             }}
             animate={{
-              // Taille qui grandit selon la question
-              scale: 0.9 + (currentQuestion / (quizQuestions.length - 1)) * 0.8
+              scale: 0.9 + (currentQuestion / Math.max(1, quizQuestions.length - 1)) * 0.8
             }}
-            transition={{ type: "spring", stiffness: 300, damping: 18 }}
+            transition={{ type: "spring", stiffness: 350, damping: 18 }}
           >
             <motion.span
-              className="block drop-shadow"
+              className="block leading-none"
               animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
-              style={{ fontSize: 20 }}
+              transition={{ duration: 0.9, repeat: Infinity, ease: "easeInOut" }}
+              style={{ fontSize: 22 }}
             >
               💗
             </motion.span>
           </motion.div>
         </div>
-
         </div>
         {/* Question */}
         <AnimatePresence mode="wait">
