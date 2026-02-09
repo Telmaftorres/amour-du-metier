@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { loadingSteps } from '../../data/questions';
 import ExperienceFooter from "../ui/ExperienceFooter";
 
@@ -8,107 +8,185 @@ function Loading({ onComplete }) {
   const [progress, setProgress] = useState(0);
   const [finalScore, setFinalScore] = useState(0);
 
+  // ✅ Nouveau : pilotage de la scène
+  // "running" -> cercle normal
+  // "explode" -> cercle implose
+  // "showText" -> texte remplace le cercle
+  const [stage, setStage] = useState("running");
+  const [hasTriggeredEnd, setHasTriggeredEnd] = useState(false);
+
   useEffect(() => {
-    // Génère un score final aléatoire entre 86 et 98
+    // ⚠️ inchangé (ta plage actuelle)
     const randomScore = Math.floor(Math.random() * (98 - 86 + 1)) + 86;
     setFinalScore(randomScore);
   }, []);
-  
+
   useEffect(() => {
-    // Animation du pourcentage qui monte progressivement
+    if (!finalScore) return;
+
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         if (prev >= finalScore) {
           clearInterval(progressInterval);
           return finalScore;
         }
-        return Math.min(prev + 2, finalScore);
+        return Math.min(prev + 1, finalScore);
       });
-    }, 50);
-  
+    }, 70);
+
     return () => clearInterval(progressInterval);
   }, [finalScore]);
-  
+
+  // Steps (inchangé dans l’esprit)
   useEffect(() => {
-    // Synchroniser les étapes avec le pourcentage
+    if (!finalScore) return;
+
     const stepPercentage = finalScore / loadingSteps.length;
-    const currentStepCalculated = Math.floor(progress / stepPercentage);
-    
-    if (currentStepCalculated !== currentStep && currentStepCalculated <= loadingSteps.length) {
+    const currentStepCalculated = Math.min(
+      loadingSteps.length - 1,
+      Math.floor(progress / stepPercentage)
+    );
+
+    if (currentStepCalculated !== currentStep) {
       setCurrentStep(currentStepCalculated);
     }
-  
-    // Si on a atteint le score final, passer au résultat après 2.5s
-    if (progress >= finalScore && currentStep >= loadingSteps.length) {
-      const timer = setTimeout(() => {
-        onComplete(finalScore);
-      }, 2500);
-      return () => clearTimeout(timer);
-    }
-  }, [progress, finalScore, currentStep, onComplete]);
+  }, [progress, finalScore, currentStep]);
 
-  // Messages selon le score
+  // ✅ Déclenchement de la séquence finale (sans dépendre des steps)
+  useEffect(() => {
+    if (!finalScore) return;
+
+    if (progress >= finalScore && !hasTriggeredEnd) {
+      setHasTriggeredEnd(true);
+      setTimeout(() => setStage("explode"), 800);
+    }
+  }, [progress, finalScore, hasTriggeredEnd]);
+
+  // Message final (inchangé)
   const getMessage = () => {
-    if (progress >= 95) return "💘 Coup de foudre professionnel !";
-    if (progress >= 90) return "🎉 Match parfait !";
-    return "✨ Excellente compatibilité !";
+    if (progress >= 95) return "Coup de foudre professionnel !";
+    if (progress >= 90) return "Match parfait !";
+    return "Excellente compatibilité !";
   };
 
-  // Calcul du cercle SVG (cercle plus grand)
+  // Cercle SVG (inchangé)
   const radius = 100;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
+  // Variants pour l’implosion
+  const circleVariants = {
+    running: { opacity: 1, scale: 1, rotate: 0 },
+    explode: {
+      opacity: 0,
+      scale: 0.15,
+      rotate: 12,
+      transition: { duration: 0.55, ease: "easeInOut" }
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 md:py-8">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 md:py-8 relative">
       <div className="text-center max-w-2xl w-full">
-        
-        {/* Cercle de progression SVG */}
+
+        {/* Cercle / Texte final */}
         <div className="flex justify-center mb-4">
-          <div className="relative w-80 h-80">
-            {/* SVG Circle */}
-            <svg className="transform -rotate-90 w-full h-full">
-              {/* Background circle */}
-              <circle
-                cx="160"
-                cy="160"
-                r={radius}
-                stroke="#2a3440"
-                strokeWidth="16"
-                fill="none"
-              />
-              {/* Progress circle */}
-              <motion.circle
-                cx="160"
-                cy="160"
-                r={radius}
-                stroke="#ff497c"
-                strokeWidth="16"
-                fill="none"
-                strokeLinecap="round"
-                strokeDasharray={circumference}
-                strokeDashoffset={strokeDashoffset}
-                style={{
-                  transition: 'stroke-dashoffset 0.3s ease',
-                  filter: 'drop-shadow(0 0 15px rgba(255, 73, 124, 0.6))'
-                }}
-              />
-            </svg>
-            
-            {/* Pourcentage au centre */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div 
-                className="text-center"
-                key={progress}
-              >
-                <div className="text-7xl font-bold text-white mb-2">
-                  {progress}%
-                </div>
-                <div className="text-lg text-gray-400">
-                  Compatibilité
-                </div>
-              </motion.div>
-            </div>
+          <div className="relative w-80 h-80 flex items-center justify-center">
+
+            <AnimatePresence mode="wait">
+              {stage !== "showText" && (
+                <motion.div
+                  key="circle"
+                  className="absolute inset-0"
+                  variants={circleVariants}
+                  initial="running"
+                  animate={stage === "explode" ? "explode" : "running"}
+                  onAnimationComplete={() => {
+                    // ✅ Quand l’implosion du cercle est terminée → on affiche le texte
+                    if (stage === "explode") {
+                      setStage("showText");
+
+                      // ✅ Laisse le texte visible un moment, puis on continue
+                      setTimeout(() => {
+                        onComplete(finalScore);
+                      }, 2000);
+                    }
+                  }}
+                >
+                  {/* Flash pendant l’implosion */}
+                  {stage === "explode" && (
+                    <motion.div
+                      className="absolute inset-0 rounded-full"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 0.25, scale: 1.18 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      style={{ background: "rgba(255,255,255,0.25)", filter: "blur(14px)" }}
+                    />
+                  )}
+
+                  <svg className="transform -rotate-90 w-full h-full">
+                    <circle
+                      cx="160"
+                      cy="160"
+                      r={radius}
+                      stroke="#2a3440"
+                      strokeWidth="16"
+                      fill="none"
+                    />
+                    <motion.circle
+                      cx="160"
+                      cy="160"
+                      r={radius}
+                      stroke="#ff497c"
+                      strokeWidth="16"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeDasharray={circumference}
+                      strokeDashoffset={strokeDashoffset}
+                      style={{
+                        transition: 'stroke-dashoffset 0.3s ease',
+                        filter: 'drop-shadow(0 0 15px rgba(255, 73, 124, 0.6))'
+                      }}
+                    />
+                  </svg>
+
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <motion.div className="text-center" key={progress}>
+                      <div className="text-7xl font-bold text-white mb-2">
+                        {progress}%
+                      </div>
+                      <div className="text-lg text-gray-400">
+                        Compatibilité
+                      </div>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Texte final qui remplace le cercle */}
+              {stage === "showText" && (
+                <motion.div
+                  key="finalText"
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="px-6"
+                >
+                  <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-kontfeel-pink to-pink-400 bg-clip-text text-transparent whitespace-nowrap">
+                    {getMessage()}
+                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: 0.1 }}
+                    className="mt-4 text-gray-300 text-base md:text-lg"
+                  >
+                    Diagnostic finalisé.
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
           </div>
         </div>
 
@@ -123,7 +201,7 @@ function Loading({ onComplete }) {
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -20 }}
-              animate={{ 
+              animate={{
                 opacity: index <= currentStep ? 1 : 0.3,
                 x: 0
               }}
@@ -140,24 +218,11 @@ function Loading({ onComplete }) {
           ))}
         </div>
 
-        {/* Message final selon le score */}
-        {currentStep >= loadingSteps.length && progress >= finalScore && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="mt-16"
-          >
-            <div className="text-3xl font-bold bg-gradient-to-r from-kontfeel-pink to-pink-400 bg-clip-text text-transparent px-4">
-            {getMessage()}
-            </div>
-          </motion.div>
-        )}
-
-      </div>
-       {/* Logo en bas */}
-       <ExperienceFooter />
+      </div>  
+      <ExperienceFooter className="bottom-2 md:bottom-4" />
     </div>
   );
 }
 
 export default Loading;
+

@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import ExperienceFooter from "../ui/ExperienceFooter";
-
 
 function Result({ answers, compatibilityScore }) {
   const [formData, setFormData] = useState({
@@ -21,16 +21,41 @@ function Result({ answers, compatibilityScore }) {
     return "Vous avez du goût";
   };
 
-  // Message principal selon le score
   const getMainMessage = () => {
     if (compatibilityScore >= 95) {
-      return "Vous ne cherchez pas un simple fournisseur, vous cherchez un partenaire qui partage votre vision. Quelqu'un qui comprend que chaque détail compte, que la qualité n'est pas négociable, et que la beauté d'un projet se construit dans la passion du travail bien fait.";
-    } else if (compatibilityScore >= 90) {
-      return "Vous cherchez un partenaire qui vibre autant que vous pour donner du volume à vos idées. Vous aimez quand c'est beau, quand c'est bien pensé. Ça tombe bien. Chez Kontfeel, notre moteur, c'est l'amour du travail bien fait pour le plaisir de sublimer votre marque en magasin.";
-    } else {
-      return "Vous avez l'œil pour reconnaître la qualité et vous savez que derrière chaque belle PLV se cache un vrai savoir-faire. Chez Kontfeel, nous mettons notre passion au service de vos projets pour créer des présentoirs qui ne laissent personne indifférent.";
+      return (
+        <>
+          Vous ne cherchez pas un simple fournisseur, vous cherchez un{" "}
+          <strong className="font-semibold">partenaire</strong> qui partage votre vision.  
+          <br /><br />
+          Quelqu’un qui comprend que chaque <strong className="font-semibold">détail</strong> compte, que la <strong className="font-semibold">qualité</strong> n’est pas négociable, et que la beauté d’un projet se construit dans la passion du travail bien fait.
+        </>
+      );
+    } 
+  
+    else if (compatibilityScore >= 90) {
+      return (
+        <>
+          Vous cherchez un <strong className="font-semibold">partenaire</strong> qui vibre autant que vous pour donner du volume à vos idées.  
+          <br /><br />
+          Vous aimez quand c’est beau, quand c’est <strong className="font-semibold">bien pensé</strong>.  
+          <br /><br />
+          Ça tombe bien. Chez Kontfeel, notre moteur, c’est l’<strong className="font-semibold">amour du travail bien fait</strong> pour sublimer votre marque en magasin.
+        </>
+      );
+    } 
+  
+    else {
+      return (
+        <>
+          Vous avez l’œil pour reconnaître la <strong className="font-semibold">qualité</strong> et vous savez que derrière chaque belle PLV se cache un <strong className="font-semibold">vrai savoir-faire</strong>.  
+          <br /><br />
+          Chez Kontfeel, nous mettons notre <strong className="font-semibold">passion</strong> au service de vos projets pour créer des présentoirs qui ne laissent personne indifférent.
+        </>
+      );
     }
   };
+  
 
   const personalizedIntro = getPersonalizedIntro();
   const mainMessage = getMainMessage();
@@ -48,7 +73,7 @@ function Result({ answers, compatibilityScore }) {
       title: "Vitrine Delsey"
     },
     {
-      url: "https://www.kontfeel.fr/realisations-plv/nos-secrets-pour-une-theatralisation-de-magasin-reussie",
+      url: "https://www.kontfeel.fr/realisations-plv/nos-secrets-pour-une_theatralisation-de-magasin-reussie",
       image: "https://amour-du-metier.vercel.app/real3.jpg",
       title: "Théâtralisation"
     }
@@ -68,24 +93,39 @@ function Result({ answers, compatibilityScore }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulation d'envoi
-    setTimeout(() => {
+  
+    try {
+      const res = await fetch("https://formspree.io/f/XXXXXXXX", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nom: formData.nom,
+          email: formData.email,
+          telephone: formData.telephone,
+          message: formData.message,
+          score: compatibilityScore,
+        }),
+      });
+  
+      if (!res.ok) throw new Error("Erreur envoi");
+  
       setIsSubmitted(true);
+    } catch (err) {
+      alert("Oups, l’envoi a échoué. Réessaie ou contacte-nous directement.");
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
-  };
+    }
+  };  
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-4 md:py-2 relative">   
-      <motion.div 
+    <div className="min-h-screen flex items-center justify-center px-6 py-4 md:py-2 relative">
+      <motion.div
         className="max-w-7xl w-full"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        
-        {/* Titre avec pourcentage - Plus d'espace en haut */}
+        {/* Titre avec pourcentage */}
         <motion.div
           className="text-center mb-10 mt-8"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -96,7 +136,7 @@ function Result({ answers, compatibilityScore }) {
             Nous sommes compatibles à{' '}
             <span className="text-kontfeel-pink">{compatibilityScore}%</span> !!!
           </h1>
-          
+
           <p className="text-base md:text-lg text-gray-300 italic">
             {personalizedIntro}.
           </p>
@@ -104,77 +144,61 @@ function Result({ answers, compatibilityScore }) {
 
         {/* Section principale : Texte + Réalisations à gauche, Formulaire à droite */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          
           {/* COLONNE GAUCHE : Texte + Réalisations */}
-          <div className="space-y-6">
-            
+          <div className="space-y-8 flex flex-col justify-center">
             {/* TEXTE DESCRIPTIF */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-center"
             >
-              <div className="bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-3xl p-6 border border-gray-700" >
-                <p className="text-sm md:text-base text-gray-200 leading-relaxed">
-                  {mainMessage.split('. ').map((sentence, index) => (
-                    <span key={index}>
-                      {sentence.trim()}{sentence.trim() && '.'}
-                      {index < mainMessage.split('. ').length - 1 && (
-                        <>
-                          <br />
-                          <br />
-                        </>
-                      )}
-                    </span>
-                  ))}
-                </p>
-              </div>
+              <p className="text-sm md:text-base text-gray-200 leading-relaxed max-w-xl mx-auto">
+                {mainMessage}
+              </p>
             </motion.div>
-
-            {/* RÉALISATIONS - 2 petites */}
+            {/* RÉALISATIONS */}
             <motion.div
+              className="mt-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-            <h3 className="text-base font-bold text-white mb-2">
-              Découvrez notre savoir-faire
-            </h3>
+              <h3 className="text-lg md:text-xl font-bold text-white mb-3 text-center">
+                Découvrez notre savoir-faire
+              </h3>
 
-            <div className="grid grid-cols-2 gap-3">
-              {selectedRealizations.map((real, index) => (
-                <motion.a
-                  key={index}
-                  href={real.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative block overflow-hidden rounded-2xl bg-gray-800 h-32 md:h-36"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  whileHover={{ scale: 1.03 }}
-                >
-                  <img
-                    src={real.image}
-                    alt={real.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-kontfeel-navy via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-0 left-0 right-0 p-3">
-                      <p className="text-white font-semibold text-xs">
-                        {real.title}
-                      </p>
-                    </div>
+              <div className="flex justify-center">
+              <motion.a
+                href={selectedRealizations[0].url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block overflow-hidden rounded-2xl bg-gray-800 w-full max-w-md h-48 md:h-56"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+                whileHover={{ scale: 1.03 }}
+              >
+                <img
+                  src={selectedRealizations[0].image}
+                  alt={selectedRealizations[0].title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-kontfeel-navy via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
+                    <p className="text-white font-semibold text-sm">
+                      {selectedRealizations[0].title}
+                    </p>
                   </div>
-                </motion.a>
-              ))}
+                </div>
+              </motion.a>
             </div>
 
-            <p className="text-center text-gray-400 text-xs mt-2">
+              <p className="text-center text-gray-400 text-xs mt-2">
                 Plus de réalisations sur{' '}
-                <a 
-                  href="https://kontfeel.fr/realisations-plv" 
-                  target="_blank" 
+                <a
+                  href="https://kontfeel.fr/realisations-plv"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-kontfeel-pink hover:underline"
                 >
@@ -182,7 +206,6 @@ function Result({ answers, compatibilityScore }) {
                 </a>
               </p>
             </motion.div>
-
           </div>
 
           {/* COLONNE DROITE : FORMULAIRE DE CONTACT */}
@@ -193,83 +216,89 @@ function Result({ answers, compatibilityScore }) {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <h2 className="text-xl font-bold text-white mb-4">
-              Parlons de votre projet
+              Parlez-nous de votre projet...
             </h2>
 
             {!isSubmitted ? (
-            <>
-              <form onSubmit={handleSubmit} className="space-y-3">
-                <input
-                  type="text"
-                  name="nom"
-                  placeholder="Nom *"
-                  required
-                  value={formData.nom}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors text-sm"
-                />
+              <>
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  <input
+                    type="text"
+                    name="nom"
+                    placeholder="Nom et prénom *"
+                    required
+                    value={formData.nom}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors text-sm"
+                  />
 
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email *"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors text-sm"
-                />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email *"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors text-sm"
+                  />
 
-                <input
-                  type="tel"
-                  name="telephone"
-                  placeholder="Téléphone"
-                  value={formData.telephone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors text-sm"
-                />
+                  <input
+                    type="tel"
+                    name="telephone"
+                    placeholder="Téléphone"
+                    value={formData.telephone}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors text-sm"
+                  />
 
-                <textarea
-                  name="message"
-                  placeholder="Parlez-nous de votre projet..."
-                  rows="3"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors resize-none text-sm"
-                />
+                  <textarea
+                    name="message"
+                    placeholder="Parlez-nous de votre projet..."
+                    rows="3"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors resize-none text-sm"
+                  />
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-3 bg-kontfeel-pink text-white rounded-xl font-semibold hover:bg-opacity-90 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                >
-                  {isSubmitting ? 'Envoi en cours...' : 'Envoyer'}
-                </button>
-              </form>
-               {/* Logo en bas */}
-              <ExperienceFooter />
-            </>
-          ) : (
-            <motion.div
-              className="text-center py-8"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-            >
-              <div className="text-5xl mb-3">🎉</div>
-              <h3 className="text-xl font-bold text-kontfeel-pink mb-2">
-                Message reçu !
-              </h3>
-              <p className="text-gray-300 text-sm mb-1">
-                On adore déjà votre projet !
-              </p>
-              <p className="text-gray-400 text-xs">
-                Notre équipe vous contactera plus vite qu'un découpage laser. 
-              </p>
-            </motion.div>
-          )}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full px-6 py-3 bg-kontfeel-pink text-white rounded-xl font-semibold hover:bg-opacity-90 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  >
+                    {isSubmitting ? 'Envoi en cours...' : 'Envoyer'}
+                  </button>
+                </form>
+
+                {/* Descend un peu le footer, tout en restant DANS le cadre */}
+                <div className="mt-8">
+                  <ExperienceFooter variant="inline" />
+                </div>
+              </>
+            ) : (
+              <motion.div
+                className="text-center py-8"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+              >
+                <div className="text-5xl mb-3">🎉</div>
+                <h3 className="text-xl font-bold text-kontfeel-pink mb-2">
+                  Message reçu !
+                </h3>
+                <p className="text-gray-300 text-sm mb-1">
+                  On adore déjà votre projet !
+                </p>
+                <p className="text-gray-400 text-xs">
+                  Notre équipe vous contactera plus vite qu'un découpage laser.
+                </p>
+
+                {/* Footer aussi dans l'état "message reçu" */}
+                <div className="mt-8 pt-6 border-t border-gray-700/50">
+                  <ExperienceFooter />
+                </div>
+              </motion.div>
+            )}
           </motion.div>
-
         </div>
-
       </motion.div>
     </div>
   );
