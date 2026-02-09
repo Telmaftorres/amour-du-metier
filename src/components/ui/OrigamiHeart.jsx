@@ -5,7 +5,7 @@ function OrigamiHeart() {
     <div className="relative w-80 h-80 mx-auto flex items-center justify-center">
       {/* Image du cœur avec effet de battement */}
       <motion.img
-        src="/heart.png"
+        src="/src/assets/heart.png"
         alt="Cœur Kontfeel"
         className="w-64 h-64 object-contain"
         animate={{
