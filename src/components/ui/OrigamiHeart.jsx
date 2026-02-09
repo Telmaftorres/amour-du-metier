@@ -6,293 +6,232 @@ function OrigamiHeart() {
       <svg
         viewBox="0 0 400 400"
         className="w-full h-full"
-        style={{ filter: 'drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6))' }}
+        style={{ filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5))' }}
       >
         <defs>
-          {/* Gradients avec BEAUCOUP plus de contraste */}
-          <linearGradient id="ultra1" x1="0%" y1="0%" x2="100%" y2="100%">
+          {/* Gradients avec BEAUCOUP plus de contraste pour le relief */}
+          <linearGradient id="facet1" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#ffb3c1" />
             <stop offset="50%" stopColor="#ff8fa3" />
             <stop offset="100%" stopColor="#ff6b81" />
           </linearGradient>
           
-          <linearGradient id="ultra2" x1="100%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id="facet2" x1="100%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#ff8fa3" />
             <stop offset="50%" stopColor="#ff6b81" />
             <stop offset="100%" stopColor="#ff497c" />
           </linearGradient>
           
-          <linearGradient id="ultra3" x1="0%" y1="100%" x2="100%" y2="0%">
+          <linearGradient id="facet3" x1="0%" y1="100%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#ff6b81" />
             <stop offset="50%" stopColor="#ff497c" />
             <stop offset="100%" stopColor="#e94560" />
           </linearGradient>
           
-          <linearGradient id="ultra4" x1="100%" y1="100%" x2="0%" y2="0%">
+          <linearGradient id="facet4" x1="100%" y1="100%" x2="0%" y2="0%">
             <stop offset="0%" stopColor="#ff497c" />
             <stop offset="50%" stopColor="#c94545" />
             <stop offset="100%" stopColor="#b03a3a" />
           </linearGradient>
 
-          <linearGradient id="ultraDark1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="facetDark1" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#c94545" />
             <stop offset="50%" stopColor="#b03a3a" />
             <stop offset="100%" stopColor="#8b2f2f" />
           </linearGradient>
           
-          <linearGradient id="ultraDark2" x1="100%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id="facetDark2" x1="100%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#b03a3a" />
             <stop offset="50%" stopColor="#8b2f2f" />
             <stop offset="100%" stopColor="#6b2020" />
           </linearGradient>
 
-          <linearGradient id="ultraShadow" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#6b2020" />
+          <linearGradient id="facetShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#8b2f2f" />
+            <stop offset="50%" stopColor="#6b2020" />
             <stop offset="100%" stopColor="#4a1515" />
           </linearGradient>
-
-          {/* Filtres pour ombres internes */}
-          <filter id="innerShadow">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-            <feOffset dx="3" dy="3"/>
-            <feComposite operator="out" in="SourceAlpha"/>
-            <feComponentTransfer>
-              <feFuncA type="linear" slope="0.6"/>
-            </feComponentTransfer>
-          </filter>
         </defs>
 
-        {/* SOMMET CENTRAL - Facette la plus claire */}
+        {/* PARTIE CENTRALE DU COEUR - Facette principale (la plus claire) */}
         <motion.path
-          d="M200,120 L160,160 L200,180 L240,160 Z"
-          fill="url(#ultra1)"
-          stroke="#4a1515"
-          strokeWidth="3"
-          strokeLinejoin="bevel"
-          initial={{ opacity: 0, scale: 0, y: -50 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.5, delay: 0.8, type: "spring", stiffness: 100 }}
-        />
-
-        {/* LOBE GAUCHE - Facette supérieure externe */}
-        <motion.path
-          d="M160,160 L100,140 L80,180 Z"
-          fill="url(#ultra2)"
-          stroke="#4a1515"
-          strokeWidth="3"
-          strokeLinejoin="bevel"
-          initial={{ opacity: 0, x: -150, rotateY: 120 }}
-          animate={{ opacity: 1, x: 0, rotateY: 0 }}
-          transition={{ duration: 2, delay: 1.2, type: "spring", stiffness: 80 }}
-        />
-
-        {/* LOBE GAUCHE - Facette arrondie */}
-        <motion.path
-          d="M100,140 L60,130 L50,180 L80,180 Z"
-          fill="url(#ultra3)"
-          stroke="#4a1515"
-          strokeWidth="3"
-          strokeLinejoin="bevel"
-          initial={{ opacity: 0, x: -180, rotateY: 150 }}
-          animate={{ opacity: 1, x: 0, rotateY: 0 }}
-          transition={{ duration: 2, delay: 1.4, type: "spring", stiffness: 70 }}
-        />
-
-        {/* LOBE GAUCHE - Facette médiane (plus sombre) */}
-        <motion.path
-          d="M80,180 L50,180 L60,230 L120,240 Z"
-          fill="url(#ultra4)"
-          stroke="#4a1515"
-          strokeWidth="3"
-          strokeLinejoin="bevel"
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.5, delay: 1.6 }}
-        />
-
-        {/* LOBE DROIT - Facette supérieure externe */}
-        <motion.path
-          d="M240,160 L300,140 L320,180 Z"
-          fill="url(#ultra2)"
-          stroke="#4a1515"
-          strokeWidth="3"
-          strokeLinejoin="bevel"
-          initial={{ opacity: 0, x: 150, rotateY: -120 }}
-          animate={{ opacity: 1, x: 0, rotateY: 0 }}
-          transition={{ duration: 2, delay: 1.2, type: "spring", stiffness: 80 }}
-        />
-
-        {/* LOBE DROIT - Facette arrondie */}
-        <motion.path
-          d="M300,140 L340,130 L350,180 L320,180 Z"
-          fill="url(#ultra3)"
-          stroke="#4a1515"
-          strokeWidth="3"
-          strokeLinejoin="bevel"
-          initial={{ opacity: 0, x: 180, rotateY: -150 }}
-          animate={{ opacity: 1, x: 0, rotateY: 0 }}
-          transition={{ duration: 2, delay: 1.4, type: "spring", stiffness: 70 }}
-        />
-
-        {/* LOBE DROIT - Facette médiane (plus sombre) */}
-        <motion.path
-          d="M320,180 L350,180 L340,230 L280,240 Z"
-          fill="url(#ultra4)"
-          stroke="#4a1515"
-          strokeWidth="3"
-          strokeLinejoin="bevel"
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.5, delay: 1.6 }}
-        />
-
-        {/* CENTRE - Facette médiane gauche */}
-        <motion.path
-          d="M160,160 L120,240 L200,260 L200,180 Z"
-          fill="url(#ultra3)"
-          stroke="#4a1515"
+          d="M200,150 L120,220 L200,320 L280,220 Z"
+          fill="url(#facet1)"
+          stroke="#2a0a0a"
           strokeWidth="3"
           strokeLinejoin="bevel"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 1.8 }}
+          transition={{ duration: 1.5, delay: 0.8, type: "spring" }}
         />
 
-        {/* CENTRE - Facette médiane droite */}
+        {/* LOBE GAUCHE HAUT - Facette extérieure */}
         <motion.path
-          d="M240,160 L280,240 L200,260 L200,180 Z"
-          fill="url(#ultra3)"
-          stroke="#4a1515"
+          d="M200,150 L140,120 L120,160 L120,220 Z"
+          fill="url(#facet2)"
+          stroke="#2a0a0a"
           strokeWidth="3"
           strokeLinejoin="bevel"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 1.8 }}
+          initial={{ x: -100, opacity: 0, rotateY: 90 }}
+          animate={{ x: 0, opacity: 1, rotateY: 0 }}
+          transition={{ duration: 2, delay: 0.4, type: "spring" }}
         />
 
-        {/* BAS GAUCHE - Facette sombre */}
+        {/* LOBE GAUCHE HAUT - Facette arrondie (plus sombre) */}
         <motion.path
-          d="M120,240 L80,280 L200,340 L200,260 Z"
-          fill="url(#ultraDark1)"
-          stroke="#4a1515"
+          d="M140,120 L100,100 L80,140 L120,160 Z"
+          fill="url(#facet3)"
+          stroke="#2a0a0a"
           strokeWidth="3"
           strokeLinejoin="bevel"
-          initial={{ opacity: 0, y: 100, rotateX: -90 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={{ duration: 1.8, delay: 2.2, type: "spring", stiffness: 90 }}
+          initial={{ x: -100, opacity: 0, rotateY: 90 }}
+          animate={{ x: 0, opacity: 1, rotateY: 0 }}
+          transition={{ duration: 2, delay: 0.6, type: "spring" }}
         />
 
-        {/* BAS GAUCHE - Facette externe très sombre */}
+        {/* LOBE GAUCHE - Facette médiane */}
         <motion.path
-          d="M60,230 L80,280 L120,240 Z"
-          fill="url(#ultraDark2)"
-          stroke="#4a1515"
+          d="M80,140 L70,180 L120,220 L120,160 Z"
+          fill="url(#facet4)"
+          stroke="#2a0a0a"
           strokeWidth="3"
           strokeLinejoin="bevel"
-          initial={{ opacity: 0, y: 80 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5, delay: 2.4 }}
+          initial={{ x: -80, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1.8, delay: 0.8 }}
         />
 
-        {/* BAS DROIT - Facette sombre */}
+        {/* LOBE DROIT HAUT - Facette extérieure */}
         <motion.path
-          d="M280,240 L320,280 L200,340 L200,260 Z"
-          fill="url(#ultraDark1)"
-          stroke="#4a1515"
+          d="M200,150 L260,120 L280,160 L280,220 Z"
+          fill="url(#facet2)"
+          stroke="#2a0a0a"
           strokeWidth="3"
           strokeLinejoin="bevel"
-          initial={{ opacity: 0, y: 100, rotateX: -90 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={{ duration: 1.8, delay: 2.2, type: "spring", stiffness: 90 }}
+          initial={{ x: 100, opacity: 0, rotateY: -90 }}
+          animate={{ x: 0, opacity: 1, rotateY: 0 }}
+          transition={{ duration: 2, delay: 0.4, type: "spring" }}
         />
 
-        {/* BAS DROIT - Facette externe très sombre */}
+        {/* LOBE DROIT HAUT - Facette arrondie (plus sombre) */}
         <motion.path
-          d="M340,230 L320,280 L280,240 Z"
-          fill="url(#ultraDark2)"
-          stroke="#4a1515"
+          d="M260,120 L300,100 L320,140 L280,160 Z"
+          fill="url(#facet3)"
+          stroke="#2a0a0a"
           strokeWidth="3"
           strokeLinejoin="bevel"
-          initial={{ opacity: 0, y: 80 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5, delay: 2.4 }}
+          initial={{ x: 100, opacity: 0, rotateY: -90 }}
+          animate={{ x: 0, opacity: 1, rotateY: 0 }}
+          transition={{ duration: 2, delay: 0.6, type: "spring" }}
         />
 
-        {/* POINTE CENTRALE - La plus sombre */}
+        {/* LOBE DROIT - Facette médiane */}
         <motion.path
-          d="M200,260 L80,280 L200,340 L320,280 Z"
-          fill="url(#ultraShadow)"
-          stroke="#4a1515"
+          d="M320,140 L330,180 L280,220 L280,160 Z"
+          fill="url(#facet4)"
+          stroke="#2a0a0a"
           strokeWidth="3"
           strokeLinejoin="bevel"
-          initial={{ opacity: 0, y: 120 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5, delay: 2.6 }}
+          initial={{ x: 80, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1.8, delay: 0.8 }}
         />
 
-        {/* ARÊTES DE PLIAGE - Très marquées */}
+        {/* PARTIE BASSE GAUCHE - Facette sombre */}
+        <motion.path
+          d="M120,220 L70,260 L200,320 Z"
+          fill="url(#facetDark1)"
+          stroke="#2a0a0a"
+          strokeWidth="3"
+          strokeLinejoin="bevel"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1.5, delay: 1.2 }}
+        />
+
+        {/* PARTIE BASSE DROITE - Facette sombre */}
+        <motion.path
+          d="M280,220 L330,260 L200,320 Z"
+          fill="url(#facetDark2)"
+          stroke="#2a0a0a"
+          strokeWidth="3"
+          strokeLinejoin="bevel"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1.5, delay: 1.2 }}
+        />
+
+        {/* POINTE CENTRALE BAS - La plus sombre */}
+        <motion.path
+          d="M120,220 L200,260 L280,220 L200,320 Z"
+          fill="url(#facetShadow)"
+          stroke="#2a0a0a"
+          strokeWidth="3"
+          strokeLinejoin="bevel"
+          initial={{ y: 80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1.5, delay: 1.5 }}
+        />
+
+        {/* ARÊTES DE PLIAGE - Plus épaisses et visibles */}
         <motion.g
           stroke="#1a0505"
           strokeWidth="2.5"
           fill="none"
           strokeDasharray="6,3"
-          initial={{ opacity: 0, pathLength: 0 }}
-          animate={{ opacity: 1, pathLength: 1 }}
-          transition={{ duration: 2, delay: 3 }}
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 2, delay: 2 }}
         >
-          {/* Arête centrale */}
-          <line x1="200" y1="120" x2="200" y2="340" />
-          {/* Arêtes diagonales principales */}
-          <line x1="160" y1="160" x2="200" y2="340" />
-          <line x1="240" y1="160" x2="200" y2="340" />
-          {/* Arêtes secondaires */}
-          <line x1="100" y1="140" x2="200" y2="260" />
-          <line x1="300" y1="140" x2="200" y2="260" />
-          <line x1="120" y1="240" x2="280" y2="240" />
-          <line x1="80" y1="180" x2="320" y2="180" />
+          <line x1="200" y1="150" x2="200" y2="320" />
+          <line x1="140" y1="120" x2="200" y2="320" />
+          <line x1="260" y1="120" x2="200" y2="320" />
+          <line x1="120" y1="220" x2="280" y2="220" />
+          <line x1="100" y1="100" x2="200" y2="260" />
+          <line x1="300" y1="100" x2="200" y2="260" />
         </motion.g>
 
-        {/* REFLETS LUMINEUX très marqués */}
+        {/* REFLETS LUMINEUX - Plus prononcés */}
         <motion.g
           fill="white"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.7 }}
-          transition={{ duration: 1, delay: 3.5 }}
+          transition={{ duration: 1, delay: 2.5 }}
         >
-          <ellipse cx="190" cy="150" rx="12" ry="8" opacity="0.8" />
-          <circle cx="150" cy="180" r="6" opacity="0.6" />
-          <circle cx="250" cy="180" r="6" opacity="0.6" />
-          <ellipse cx="200" cy="220" rx="10" ry="6" opacity="0.5" />
+          <ellipse cx="190" cy="170" rx="15" ry="10" opacity="0.8" />
+          <circle cx="150" cy="150" r="8" opacity="0.6" />
+          <circle cx="250" cy="150" r="8" opacity="0.6" />
+          <ellipse cx="200" cy="220" rx="12" ry="8" opacity="0.5" />
         </motion.g>
 
-        {/* OMBRES PORTÉES sur certaines facettes */}
+        {/* OMBRES PORTÉES sur facettes pour accentuer le relief */}
         <motion.g
           fill="black"
-          opacity="0.2"
+          opacity="0.25"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.2 }}
-          transition={{ duration: 1, delay: 3.2 }}
+          animate={{ opacity: 0.25 }}
+          transition={{ duration: 1, delay: 2.3 }}
         >
-          <path d="M80,180 L85,185 L120,242 L120,240 Z" />
-          <path d="M320,180 L315,185 L280,242 L280,240 Z" />
+          <path d="M120,160 L125,165 L120,220 Z" />
+          <path d="M280,160 L275,165 L280,220 Z" />
+          <path d="M200,260 L205,265 L195,265 Z" />
         </motion.g>
 
       </svg>
 
-      {/* Ombre portée TRÈS prononcée */}
+      {/* Double ombre portée pour plus de profondeur */}
       <motion.div
         className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 w-64 h-12 bg-black rounded-full blur-3xl"
         initial={{ opacity: 0, scaleX: 0 }}
         animate={{ opacity: 0.5, scaleX: 1 }}
-        transition={{ duration: 2, delay: 2 }}
+        transition={{ duration: 2, delay: 1.5 }}
       />
 
-      {/* Deuxième ombre (glow rose) */}
       <motion.div
         className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 w-56 h-10 bg-kontfeel-pink rounded-full blur-2xl"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}
-        transition={{ duration: 2, delay: 2.5 }}
+        transition={{ duration: 2, delay: 2 }}
       />
     </div>
   );
