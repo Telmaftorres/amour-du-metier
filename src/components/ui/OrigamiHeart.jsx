@@ -2,166 +2,193 @@ import { motion } from 'framer-motion';
 
 function OrigamiHeart() {
   return (
-    <div className="relative w-56 h-56 mx-auto">
+    <div className="relative w-64 h-64 mx-auto">
       <svg
-        viewBox="0 0 300 300"
+        viewBox="0 0 400 400"
         className="w-full h-full"
+        style={{ filter: 'drop-shadow(0 20px 40px rgba(255, 73, 124, 0.4))' }}
       >
         <defs>
-          {/* Gradient pour effet matière pliée */}
-          <linearGradient id="foldGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#c94545" />
-            <stop offset="50%" stopColor="#ff497c" />
+          {/* Gradients pour effet 3D - facettes claires */}
+          <linearGradient id="facet1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ff6b81" />
+            <stop offset="100%" stopColor="#ff8fa3" />
+          </linearGradient>
+          
+          <linearGradient id="facet2" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#ff497c" />
             <stop offset="100%" stopColor="#ff6b81" />
           </linearGradient>
           
-          <linearGradient id="foldGradient2" x1="100%" y1="0%" x2="0%" y2="0%">
+          <linearGradient id="facet3" x1="0%" y1="100%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#c94545" />
-            <stop offset="50%" stopColor="#ff497c" />
-            <stop offset="100%" stopColor="#ff6b81" />
+            <stop offset="100%" stopColor="#ff497c" />
+          </linearGradient>
+          
+          <linearGradient id="facet4" x1="100%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stopColor="#b03a3a" />
+            <stop offset="100%" stopColor="#c94545" />
           </linearGradient>
 
-          {/* Ombre pour profondeur */}
-          <filter id="innerShadow">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-            <feOffset dx="2" dy="2" result="offsetblur"/>
-            <feComponentTransfer>
-              <feFuncA type="linear" slope="0.5"/>
-            </feComponentTransfer>
-            <feMerge>
-              <feMergeNode/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
+          {/* Gradients pour facettes sombres */}
+          <linearGradient id="facetDark1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#c94545" />
+            <stop offset="100%" stopColor="#a83838" />
+          </linearGradient>
+          
+          <linearGradient id="facetDark2" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#b03a3a" />
+            <stop offset="100%" stopColor="#c94545" />
+          </linearGradient>
         </defs>
 
-        {/* PARTIE GAUCHE DU COEUR - Se déplie de la gauche */}
+        {/* PARTIE CENTRALE DU COEUR - Facette principale */}
         <motion.path
-          d="M150,80 Q130,60 110,60 Q70,60 70,100 Q70,130 100,160 L150,210"
-          fill="url(#foldGradient1)"
-          stroke="#1f2732"
+          d="M200,150 L120,220 L200,320 L280,220 Z"
+          fill="url(#facet1)"
+          stroke="#8b2f2f"
           strokeWidth="2"
-          filter="url(#innerShadow)"
-          initial={{ 
-            scaleX: 0,
-            x: -80,
-            opacity: 0,
-            rotateY: 90
-          }}
-          animate={{ 
-            scaleX: 1,
-            x: 0,
-            opacity: 1,
-            rotateY: 0
-          }}
-          transition={{ 
-            duration: 1.2,
-            delay: 0.3,
-            type: "spring",
-            stiffness: 60
-          }}
-          style={{ transformOrigin: "150px 150px" }}
+          strokeLinejoin="bevel"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
         />
 
-        {/* PARTIE DROITE DU COEUR - Se déplie de la droite */}
+        {/* LOBE GAUCHE HAUT - Facettes multiples pour effet 3D */}
         <motion.path
-          d="M150,80 Q170,60 190,60 Q230,60 230,100 Q230,130 200,160 L150,210"
-          fill="url(#foldGradient2)"
-          stroke="#1f2732"
+          d="M200,150 L140,120 L120,160 L120,220 Z"
+          fill="url(#facet2)"
+          stroke="#8b2f2f"
           strokeWidth="2"
-          filter="url(#innerShadow)"
-          initial={{ 
-            scaleX: 0,
-            x: 80,
-            opacity: 0,
-            rotateY: -90
-          }}
-          animate={{ 
-            scaleX: 1,
-            x: 0,
-            opacity: 1,
-            rotateY: 0
-          }}
-          transition={{ 
-            duration: 1.2,
-            delay: 0.5,
-            type: "spring",
-            stiffness: 60
-          }}
-          style={{ transformOrigin: "150px 150px" }}
+          strokeLinejoin="bevel"
+          initial={{ x: -100, opacity: 0, rotateY: 90 }}
+          animate={{ x: 0, opacity: 1, rotateY: 0 }}
+          transition={{ duration: 1, delay: 0.2, type: "spring" }}
         />
 
-        {/* LIGNE DE PLIAGE CENTRALE - Très visible */}
-        <motion.line
-          x1="150"
-          y1="80"
-          x2="150"
-          y2="210"
-          stroke="#1f2732"
-          strokeWidth="3"
-          strokeDasharray="8,4"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.8 }}
-          transition={{ duration: 1.5, delay: 1.2, ease: "easeInOut" }}
+        <motion.path
+          d="M140,120 L100,100 L80,140 L120,160 Z"
+          fill="url(#facetDark1)"
+          stroke="#8b2f2f"
+          strokeWidth="2"
+          strokeLinejoin="bevel"
+          initial={{ x: -100, opacity: 0, rotateY: 90 }}
+          animate={{ x: 0, opacity: 1, rotateY: 0 }}
+          transition={{ duration: 1, delay: 0.3, type: "spring" }}
         />
 
-        {/* LIGNES DE PLIAGE DIAGONALES - Très marquées */}
-        <motion.g
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.7 }}
-          transition={{ duration: 1, delay: 1.8 }}
-          stroke="#1f2732"
+        <motion.path
+          d="M80,140 L70,180 L120,220 L120,160 Z"
+          fill="url(#facet3)"
+          stroke="#8b2f2f"
           strokeWidth="2"
-          strokeDasharray="6,3"
-        >
-          {/* Lignes de construction du haut */}
-          <line x1="150" y1="80" x2="100" y2="120" />
-          <line x1="150" y1="80" x2="200" y2="120" />
-          
-          {/* Lignes de construction du milieu */}
-          <line x1="100" y1="120" x2="150" y2="165" />
-          <line x1="200" y1="120" x2="150" y2="165" />
-          
-          {/* Lignes supplémentaires pour effet origami */}
-          <line x1="100" y1="160" x2="150" y2="210" />
-          <line x1="200" y1="160" x2="150" y2="210" />
-        </motion.g>
+          strokeLinejoin="bevel"
+          initial={{ x: -80, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.4 }}
+        />
 
-        {/* POINTS DE PLIAGE - Très visibles */}
-        <motion.g
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 2.2 }}
-        >
-          <circle cx="150" cy="80" r="5" fill="#1f2732" />
-          <circle cx="100" cy="120" r="4" fill="#1f2732" />
-          <circle cx="200" cy="120" r="4" fill="#1f2732" />
-          <circle cx="150" cy="165" r="4" fill="#1f2732" />
-          <circle cx="150" cy="210" r="5" fill="#1f2732" />
-        </motion.g>
+        {/* LOBE DROIT HAUT - Facettes multiples */}
+        <motion.path
+          d="M200,150 L260,120 L280,160 L280,220 Z"
+          fill="url(#facet2)"
+          stroke="#8b2f2f"
+          strokeWidth="2"
+          strokeLinejoin="bevel"
+          initial={{ x: 100, opacity: 0, rotateY: -90 }}
+          animate={{ x: 0, opacity: 1, rotateY: 0 }}
+          transition={{ duration: 1, delay: 0.2, type: "spring" }}
+        />
 
-        {/* ANNOTATIONS DE PLIAGE (optionnel - style plan technique) */}
+        <motion.path
+          d="M260,120 L300,100 L320,140 L280,160 Z"
+          fill="url(#facetDark2)"
+          stroke="#8b2f2f"
+          strokeWidth="2"
+          strokeLinejoin="bevel"
+          initial={{ x: 100, opacity: 0, rotateY: -90 }}
+          animate={{ x: 0, opacity: 1, rotateY: 0 }}
+          transition={{ duration: 1, delay: 0.3, type: "spring" }}
+        />
+
+        <motion.path
+          d="M320,140 L330,180 L280,220 L280,160 Z"
+          fill="url(#facet4)"
+          stroke="#8b2f2f"
+          strokeWidth="2"
+          strokeLinejoin="bevel"
+          initial={{ x: 80, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.4 }}
+        />
+
+        {/* PARTIE BASSE GAUCHE */}
+        <motion.path
+          d="M120,220 L70,260 L200,320 Z"
+          fill="url(#facetDark1)"
+          stroke="#8b2f2f"
+          strokeWidth="2"
+          strokeLinejoin="bevel"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        />
+
+        {/* PARTIE BASSE DROITE */}
+        <motion.path
+          d="M280,220 L330,260 L200,320 Z"
+          fill="url(#facetDark2)"
+          stroke="#8b2f2f"
+          strokeWidth="2"
+          strokeLinejoin="bevel"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        />
+
+        {/* ARÊTES DE PLIAGE - lignes structurelles */}
         <motion.g
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          transition={{ duration: 0.8, delay: 2.5 }}
+          stroke="#6b2020"
+          strokeWidth="1.5"
           fill="none"
-          stroke="#ff497c"
-          strokeWidth="1"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.8 }}
+          transition={{ duration: 1, delay: 1.2 }}
         >
-          {/* Petites marques de mesure */}
-          <line x1="145" y1="75" x2="145" y2="85" />
-          <line x1="155" y1="75" x2="155" y2="85" />
+          {/* Arêtes principales */}
+          <line x1="200" y1="150" x2="200" y2="320" />
+          <line x1="120" y1="220" x2="280" y2="220" />
+          <line x1="140" y1="120" x2="200" y2="320" />
+          <line x1="260" y1="120" x2="200" y2="320" />
         </motion.g>
+
+        {/* REFLETS LUMINEUX pour effet brillant */}
+        <motion.path
+          d="M180,160 L190,150 L200,160 L190,170 Z"
+          fill="white"
+          opacity="0.4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4 }}
+          transition={{ duration: 0.5, delay: 1.5 }}
+        />
+
+        <motion.path
+          d="M140,180 L150,170 L160,180 L150,190 Z"
+          fill="white"
+          opacity="0.3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.3 }}
+          transition={{ duration: 0.5, delay: 1.6 }}
+        />
 
       </svg>
 
-      {/* OMBRE PORTÉE DYNAMIQUE */}
+      {/* Ombre portée animée */}
       <motion.div
-        className="absolute inset-0 bg-kontfeel-pink rounded-full blur-3xl -z-10"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 0.3, scale: 1 }}
-        transition={{ duration: 1.5, delay: 0.5 }}
+        className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-48 h-8 bg-kontfeel-pink rounded-full blur-2xl"
+        initial={{ opacity: 0, scaleX: 0 }}
+        animate={{ opacity: 0.3, scaleX: 1 }}
+        transition={{ duration: 1, delay: 1 }}
       />
     </div>
   );
