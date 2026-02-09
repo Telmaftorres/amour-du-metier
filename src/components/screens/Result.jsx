@@ -77,7 +77,7 @@ function Result({ answers, compatibilityScore }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-8 relative">
+    <div className="min-h-screen flex items-center justify-center px-6 py-4 md:py-2 relative">
       <Logo />
       
       <motion.div 
@@ -116,7 +116,7 @@ function Result({ answers, compatibilityScore }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <div className="bg-gray-800 bg-opacity-30 backdrop-blur-sm rounded-3xl p-6 border border-gray-700">
+              <div className="bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-3xl p-6 border border-gray-700" >
                 <p className="text-sm md:text-base text-gray-200 leading-relaxed">
                   {mainMessage.split('. ').map((sentence, index) => (
                     <span key={index}>
@@ -139,40 +139,40 @@ function Result({ answers, compatibilityScore }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <h3 className="text-lg font-bold text-white mb-3">
-                Découvrez notre savoir-faire
-              </h3>
-              
-              <div className="grid grid-cols-2 gap-4">
-                {selectedRealizations.map((real, index) => (
-                  <motion.a
-                    key={index}
-                    href={real.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative block overflow-hidden rounded-2xl aspect-square bg-gray-800"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <img 
-                      src={real.image}
-                      alt={real.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-kontfeel-navy via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-0 left-0 right-0 p-3">
-                        <p className="text-white font-semibold text-xs">
-                          {real.title}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.a>
-                ))}
-              </div>
+            <h3 className="text-base font-bold text-white mb-2">
+              Découvrez notre savoir-faire
+            </h3>
 
-              <p className="text-center text-gray-400 text-xs mt-3">
+            <div className="grid grid-cols-2 gap-3">
+              {selectedRealizations.map((real, index) => (
+                <motion.a
+                  key={index}
+                  href={real.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative block overflow-hidden rounded-2xl bg-gray-800 h-32 md:h-36"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                  whileHover={{ scale: 1.03 }}
+                >
+                  <img
+                    src={real.image}
+                    alt={real.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-kontfeel-navy via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-0 left-0 right-0 p-3">
+                      <p className="text-white font-semibold text-xs">
+                        {real.title}
+                      </p>
+                    </div>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+
+            <p className="text-center text-gray-400 text-xs mt-2">
                 Plus de réalisations sur{' '}
                 <a 
                   href="https://kontfeel.fr/realisations-plv" 
@@ -258,7 +258,8 @@ function Result({ answers, compatibilityScore }) {
                 <img 
                   src="/logo.png" 
                   alt="Kontfeel"
-                  className="h-12 w-auto opacity-70"
+                  className="h-16 md:h-20 w-auto opacity-80"
+
                 />
               </motion.div>
             </>
