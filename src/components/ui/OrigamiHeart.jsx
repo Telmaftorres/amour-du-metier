@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 function OrigamiHeart() {
   return (
-    <div className="relative w-64 h-64 mx-auto">
+    <div className="relative w-80 h-80 mx-auto">
       <svg
         viewBox="0 0 400 400"
         className="w-full h-full"
@@ -51,7 +51,7 @@ function OrigamiHeart() {
           strokeLinejoin="bevel"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: 1.5, delay: 0.8 }}
         />
 
         {/* LOBE GAUCHE HAUT - Facettes multiples pour effet 3D */}
@@ -63,7 +63,7 @@ function OrigamiHeart() {
           strokeLinejoin="bevel"
           initial={{ x: -100, opacity: 0, rotateY: 90 }}
           animate={{ x: 0, opacity: 1, rotateY: 0 }}
-          transition={{ duration: 1, delay: 0.2, type: "spring" }}
+          transition={{ duration: 2, delay: 0.4, type: "spring" }}
         />
 
         <motion.path
@@ -74,7 +74,7 @@ function OrigamiHeart() {
           strokeLinejoin="bevel"
           initial={{ x: -100, opacity: 0, rotateY: 90 }}
           animate={{ x: 0, opacity: 1, rotateY: 0 }}
-          transition={{ duration: 1, delay: 0.3, type: "spring" }}
+          transition={{ duration: 2, delay: 0.6, type: "spring" }}
         />
 
         <motion.path
@@ -85,7 +85,7 @@ function OrigamiHeart() {
           strokeLinejoin="bevel"
           initial={{ x: -80, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
+          transition={{ duration: 2, delay: 0.8 }}
         />
 
         {/* LOBE DROIT HAUT - Facettes multiples */}
@@ -131,7 +131,7 @@ function OrigamiHeart() {
           strokeLinejoin="bevel"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 1.5, delay: 1.2 }}
         />
 
         {/* PARTIE BASSE DROITE */}
@@ -143,7 +143,7 @@ function OrigamiHeart() {
           strokeLinejoin="bevel"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 1.5, delay: 1.2 }}
         />
 
         {/* ARÊTES DE PLIAGE - lignes structurelles */}
@@ -153,7 +153,7 @@ function OrigamiHeart() {
           fill="none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.8 }}
-          transition={{ duration: 1, delay: 1.2 }}
+          transition={{ duration: 1.5, delay: 2 }}
         >
           {/* Arêtes principales */}
           <line x1="200" y1="150" x2="200" y2="320" />
@@ -169,7 +169,7 @@ function OrigamiHeart() {
           opacity="0.4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.4 }}
-          transition={{ duration: 0.5, delay: 1.5 }}
+          transition={{ duration: 0.8, delay: 2.5 }}
         />
 
         <motion.path
@@ -178,7 +178,7 @@ function OrigamiHeart() {
           opacity="0.3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.3 }}
-          transition={{ duration: 0.5, delay: 1.6 }}
+          transition={{ duration: 0.8, delay: 2.6 }}
         />
 
       </svg>
@@ -188,7 +188,7 @@ function OrigamiHeart() {
         className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-48 h-8 bg-kontfeel-pink rounded-full blur-2xl"
         initial={{ opacity: 0, scaleX: 0 }}
         animate={{ opacity: 0.3, scaleX: 1 }}
-        transition={{ duration: 1, delay: 1 }}
+        transition={{ duration: 1.5, delay: 2 }}
       />
     </div>
   );
