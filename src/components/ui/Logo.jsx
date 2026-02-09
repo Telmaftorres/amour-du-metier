@@ -11,7 +11,7 @@ function Logo({ withHover = false }) {
       <img 
         src="/logo.png" 
         alt="Kontfeel"
-        className={`h-16 w-auto opacity-80 ${withHover ? 'hover:opacity-100 transition-opacity' : ''}`}
+        className={`h-24 w-auto opacity-80 ${withHover ? 'hover:opacity-100 transition-opacity' : ''}`}
       />
     </motion.div>
   );
