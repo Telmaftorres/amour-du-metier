@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { quizQuestions } from '../../data/questions';
 import Button from '../ui/Button';
 import Logo from '../ui/Logo';
-import HeartCursor from '../ui/HeartCursor';
 
 function Quiz({ onComplete }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -12,8 +11,6 @@ function Quiz({ onComplete }) {
   const question = quizQuestions[currentQuestion];
   const isLastQuestion = currentQuestion === quizQuestions.length - 1;
   const hasAnswer = answers[question.id] !== undefined;
-  const progress = quizQuestions.length <= 1 ? 1 : currentQuestion / (quizQuestions.length - 1);
-
 
   // Quand on sélectionne une réponse
   const handleSelectAnswer = (answerId, profile) => {
@@ -42,7 +39,6 @@ function Quiz({ onComplete }) {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 cursor-none">
-      <HeartCursor progress={progress} />
       <div className="max-w-3xl w-full">
 
         {/* Logo Kontfeel discret */}
@@ -55,14 +51,43 @@ function Quiz({ onComplete }) {
               {question.step}
             </span>
           </div>
+          {/* BARRE DE PROGRESSION + COEUR */}
+        <div className="relative">
+          {/* Barre grise */}
           <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-            <motion.div 
+            {/* Barre blanche qui avance */}
+            <motion.div
               className="h-full bg-white rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${((currentQuestion + 1) / quizQuestions.length) * 100}%` }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             />
           </div>
+
+          {/* Coeur qui suit la progression et grossit */}
+          <motion.div
+            className="absolute top-1/2 -translate-y-1/2"
+            // Position du coeur : on le place à "progress%" de la barre
+            style={{
+              left: `calc(${((currentQuestion + 1) / quizQuestions.length) * 100}% - 12px)`
+            }}
+            animate={{
+              // Taille qui grandit selon la question
+              scale: 0.9 + (currentQuestion / (quizQuestions.length - 1)) * 0.8
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 18 }}
+          >
+            <motion.span
+              className="block drop-shadow"
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
+              style={{ fontSize: 20 }}
+            >
+              💗
+            </motion.span>
+          </motion.div>
+        </div>
+
         </div>
         {/* Question */}
         <AnimatePresence mode="wait">
