@@ -7,13 +7,14 @@ function Welcome({ onStart }) {
     <div className="min-h-screen flex flex-col items-center justify-center px-8 relative">
       
       {/* Container principal centré */}
-      <div className="max-w-4xl w-full mx-auto text-center space-y-8">        
+      <div className="max-w-4xl w-full mx-auto text-center space-y-6">
+        
         {/* Cœur origami qui se plie */}
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
-          className="flex justify-center mt-12 md:mt-0"
+          className="flex justify-center mt-8 md:mt-0"
         >
           <div className="relative">
             <OrigamiHeart />
@@ -24,12 +25,12 @@ function Welcome({ onStart }) {
 
         {/* Titres */}
         <motion.div 
-          className="space-y-8"
+          className="space-y-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-7xl md:text-8xl font-bold tracking-tight leading-none">
+          <h1 className="text-6xl md:text-7xl font-bold tracking-tight leading-none">
             <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               L'AMOUR
             </span>
@@ -39,11 +40,11 @@ function Welcome({ onStart }) {
             </span>
           </h1>
 
-          <h2 className="text-3xl md:text-4xl font-semibold text-white">
+          <h2 className="text-2xl md:text-3xl font-semibold text-white">
             Sommes-nous faits l'un pour l'autre ?
           </h2>
 
-          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light">
             Le test de compatibilité pour ceux qui mettent du cœur à l'ouvrage.
           </p>
         </motion.div>
@@ -53,7 +54,7 @@ function Welcome({ onStart }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="pt-8 pb-32"
+          className="pt-6 pb-20 md:pb-8"
         >
           <Button onClick={onStart}>
             LANCER LE TEST
@@ -70,7 +71,7 @@ function Welcome({ onStart }) {
         transition={{ duration: 1, delay: 1 }}
       >
         <p className="text-sm md:text-base text-gray-500 font-light">
-          Une expérience <span className="text-kontfeel-pink font-semibold">Kontfeel</span>
+          Une initiative <span className="text-kontfeel-pink font-semibold">Kontfeel</span>
         </p>
       </motion.div>
 

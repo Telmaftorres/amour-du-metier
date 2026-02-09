@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import Button from '../ui/Button';
 
 function Result({ answers, compatibilityScore }) {
   // Récupérer une phrase personnalisée depuis les réponses
@@ -37,24 +36,24 @@ function Result({ answers, compatibilityScore }) {
   const personalizedIntro = getPersonalizedIntro();
   const mainMessage = getMainMessage();
 
-// Images des réalisations
-const realisations = [
-  {
-    url: "https://www.kontfeel.fr/realisations-plv/arche-evenementielle-sur-mesure-pour-une-operation-de-noel",
-    image: "https://www.kontfeel.fr/assets/realisations/arche-evenementielle-sur-mesure.jpg",
-    title: "Arche événementielle Noël"
-  },
-  {
-    url: "https://www.kontfeel.fr/realisations-plv/plv-vitrine-sur-les-champs-elysees-quand-delsey-reinvente-le-voyage-chez-monoprix",
-    image: "https://www.kontfeel.fr/assets/realisations/plv-vitrine-sur-mesure-champs-elysees.jpg",
-    title: "Vitrine Delsey Champs-Élysées"
-  },
-  {
-    url: "https://www.kontfeel.fr/realisations-plv/nos-secrets-pour-une-theatralisation-de-magasin-reussie",
-    image: "https://www.kontfeel.fr/assets/realisations/theatralisation-magasin-avec-plv-sur-mesure.jpg",
-    title: "Théâtralisation de magasin"
-  }
-];
+  // Images des réalisations
+  const realisations = [
+    {
+      url: "https://www.kontfeel.fr/realisations-plv/arche-evenementielle-sur-mesure-pour-une-operation-de-noel",
+      image: "https://www.kontfeel.fr/assets/realisations/arche-evenementielle-sur-mesure.jpg",
+      title: "Arche événementielle Noël"
+    },
+    {
+      url: "https://www.kontfeel.fr/realisations-plv/plv-vitrine-sur-les-champs-elysees-quand-delsey-reinvente-le-voyage-chez-monoprix",
+      image: "https://www.kontfeel.fr/assets/realisations/plv-vitrine-sur-mesure-champs-elysees.jpg",
+      title: "Vitrine Delsey Champs-Élysées"
+    },
+    {
+      url: "https://www.kontfeel.fr/realisations-plv/nos-secrets-pour-une-theatralisation-de-magasin-reussie",
+      image: "https://www.kontfeel.fr/assets/realisations/theatralisation-magasin-avec-plv-sur-mesure.jpg",
+      title: "Théâtralisation de magasin"
+    }
+  ];
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-12">
@@ -108,7 +107,7 @@ const realisations = [
           {mainMessage.intro}
         </motion.p>
 
-        {/* Texte principal */}
+        {/* Texte principal en italique */}
         <motion.div 
           className="text-sm md:text-base text-gray-200 leading-relaxed mb-10 italic"
           initial={{ opacity: 0, y: 20 }}
@@ -120,46 +119,25 @@ const realisations = [
           </p>
         </motion.div>
 
-        {/* Boutons CTA - Plus petits */}
-        <motion.div 
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-        >
-          <button
-            onClick={() => window.open('https://kontfeel.fr', '_blank')}
-            className="px-6 py-3 bg-kontfeel-pink text-white rounded-xl font-semibold text-base hover:bg-opacity-90 transition-all"
-          >
-            Découvrir nos créations
-          </button>
-          <button
-            onClick={() => window.open('https://kontfeel.fr/contact', '_blank')}
-            className="px-6 py-3 bg-kontfeel-light text-kontfeel-navy rounded-xl font-semibold text-base hover:bg-opacity-90 transition-all"
-          >
-            Contactez-nous
-          </button>
-        </motion.div>
-
         {/* Séparateur */}
         <motion.div
           className="w-32 h-1 bg-gradient-to-r from-transparent via-kontfeel-pink to-transparent mx-auto mb-8"
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 1.4 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
         />
 
         {/* Section Réalisations */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.6 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
         >
           <h3 className="text-2xl font-bold text-white mb-6">
             Découvrez nos dernières réalisations
           </h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {realisations.map((real, index) => (
               <motion.a
                 key={index}
@@ -169,7 +147,7 @@ const realisations = [
                 className="group relative overflow-hidden rounded-2xl aspect-square bg-gray-800"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.8 + index * 0.1 }}
+                transition={{ duration: 0.5, delay: 1.6 + index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
               >
                 <img 
@@ -187,6 +165,20 @@ const realisations = [
               </motion.a>
             ))}
           </div>
+
+          {/* Bouton Contact unique */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 2 }}
+          >
+            <button
+              onClick={() => window.open('https://kontfeel.fr/contact', '_blank')}
+              className="px-10 py-4 bg-kontfeel-pink text-white rounded-2xl font-semibold text-lg hover:bg-opacity-90 hover:scale-105 transition-all shadow-lg"
+            >
+              Contactez-nous pour votre projet
+            </button>
+          </motion.div>
         </motion.div>
 
         {/* Note subtile */}
@@ -194,7 +186,7 @@ const realisations = [
           className="text-sm text-gray-500 mt-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 2 }}
+          transition={{ duration: 0.8, delay: 2.2 }}
         >
           * Spoiler : On savait qu'on était faits l'un pour l'autre dès le départ 😉
         </motion.p>
