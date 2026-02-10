@@ -39,7 +39,7 @@ function Quiz({ onComplete }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative pb-20 md:pb-0">
+    <div className="min-h-[100svh] md:min-h-screen flex items-center justify-center px-4 py-12 relative pb-24 md:pb-0">
       <div className="max-w-3xl w-full">
 
         {/* Indicateur de progression */}
