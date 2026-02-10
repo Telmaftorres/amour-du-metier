@@ -7,7 +7,10 @@ function ExperienceFooter({ variant = "page", className = "" }) {
   return (
     <motion.div
       className={[
-        isInline ? "w-full text-center px-4" : "absolute bottom-6 text-center w-full px-4",
+        isInline
+            ? "w-full text-center px-4"
+            : "fixed bottom-3 inset-x-0 text-center w-full px-4 z-50 md:absolute md:bottom-6 md:z-auto"
+            ,
         className,
       ].join(" ")}
       initial={{ opacity: 0 }}
