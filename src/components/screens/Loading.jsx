@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { loadingSteps } from '../../data/questions';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { loadingSteps } from "../../data/questions";
 import ExperienceFooter from "../ui/ExperienceFooter";
 
 function Loading({ onComplete }) {
@@ -20,7 +20,7 @@ function Loading({ onComplete }) {
     if (!finalScore) return;
 
     const progressInterval = setInterval(() => {
-      setProgress(prev => {
+      setProgress((prev) => {
         if (prev >= finalScore) {
           clearInterval(progressInterval);
           return finalScore;
@@ -76,18 +76,16 @@ function Loading({ onComplete }) {
       opacity: 0,
       scale: 0.15,
       rotate: 12,
-      transition: { duration: 0.55, ease: "easeInOut" }
-    }
+      transition: { duration: 0.55, ease: "easeInOut" },
+    },
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 md:py-8 relative pb-20 md:pb-0">
       <div className="text-center max-w-2xl w-full">
-
         {/* Cercle / Texte final */}
         <div className="flex justify-center mb-4">
           <div className="relative w-80 h-80 flex items-center justify-center">
-
             <AnimatePresence mode="wait">
               {stage !== "showText" && (
                 <motion.div
@@ -115,7 +113,10 @@ function Loading({ onComplete }) {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 0.25, scale: 1.18 }}
                       transition={{ duration: 0.25, ease: "easeOut" }}
-                      style={{ background: "rgba(255,255,255,0.25)", filter: "blur(14px)" }}
+                      style={{
+                        background: "rgba(255,255,255,0.25)",
+                        filter: "blur(14px)",
+                      }}
                     />
                   )}
 
@@ -139,8 +140,8 @@ function Loading({ onComplete }) {
                       strokeDasharray={circumference}
                       strokeDashoffset={strokeDashoffset}
                       style={{
-                        transition: 'stroke-dashoffset 0.3s ease',
-                        filter: 'drop-shadow(0 0 15px rgba(255, 73, 124, 0.6))'
+                        transition: "stroke-dashoffset 0.3s ease",
+                        filter: "drop-shadow(0 0 15px rgba(255, 73, 124, 0.6))",
                       }}
                     />
                   </svg>
@@ -150,9 +151,7 @@ function Loading({ onComplete }) {
                       <div className="text-7xl font-bold text-white mb-2">
                         {progress}%
                       </div>
-                      <div className="text-lg text-gray-400">
-                        Compatibilité
-                      </div>
+                      <div className="text-lg text-gray-400">Compatibilité</div>
                     </motion.div>
                   </div>
                 </motion.div>
@@ -181,43 +180,64 @@ function Loading({ onComplete }) {
                 </motion.div>
               )}
             </AnimatePresence>
-
           </div>
         </div>
 
-        {/* Titre */}
-        <h2 className="text-3xl font-bold mb-4 hidden md:block">
-          Analyse en cours...
-        </h2>
-
-        {/* Liste des étapes */}
-        <div className="space-y-6 hidden md:block">
-          {loadingSteps.map((step, index) => (
+        {/* ✅ MOBILE : une phrase à la fois */}
+        <div className="md:hidden mt-6">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{
-                opacity: index <= currentStep ? 1 : 0.3,
-                x: 0
-              }}
-              transition={{ duration: 0.5 }}
-              className={`text-lg flex items-center justify-center ${
-                index <= currentStep ? 'text-white' : 'text-gray-600'
-              }`}
+              key={currentStep}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35 }}
+              className="text-gray-300 text-base px-6"
             >
-              <span className="mr-4 text-2xl">
-                {index < currentStep ? '✓' : index === currentStep ? '⏳' : '○'}
+              <span className="text-kontfeel-pink font-semibold mr-2">
+                {currentStep === loadingSteps.length - 1 ? "✓" : "⏳"}
               </span>
-              {step}
+              {loadingSteps[currentStep]}
             </motion.div>
-          ))}
+          </AnimatePresence>
+
+          <div className="mt-3 text-xs text-gray-500">Analyse en cours…</div>
         </div>
 
-      </div>  
-      <ExperienceFooter className="bottom-2 md:bottom-4" />
+        {/* ✅ DESKTOP : liste complète */}
+        <div className="hidden md:block">
+          <h2 className="text-3xl font-bold mb-4">Analyse en cours...</h2>
+
+          <div className="space-y-6">
+            {loadingSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{
+                  opacity: index <= currentStep ? 1 : 0.3,
+                  x: 0,
+                }}
+                transition={{ duration: 0.5 }}
+                className={`text-lg flex items-center justify-center ${
+                  index <= currentStep ? "text-white" : "text-gray-600"
+                }`}
+              >
+                <span className="mr-4 text-2xl">
+                  {index < currentStep ? "✓" : index === currentStep ? "⏳" : "○"}
+                </span>
+                {step}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Footer en bas */}
+      <ExperienceFooter />
     </div>
   );
 }
 
 export default Loading;
+
 
