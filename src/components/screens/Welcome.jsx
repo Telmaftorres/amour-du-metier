@@ -5,69 +5,72 @@ import ExperienceFooter from "../ui/ExperienceFooter";
 
 function Welcome({ onStart }) {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-8 relative">
+    // h-screen pour bloquer la hauteur, overflow-hidden pour éviter le scroll
+    <div className="h-screen flex flex-col items-center px-8 relative overflow-hidden">
+      
+      {/* 1. Ressort du haut (plus petit) */}
+      <div className="flex-grow-[1]" />
 
-      {/* Container principal centré */}
-      <div className="max-w-4xl w-full mx-auto text-center space-y-6">
+      {/* 2. Container principal (remonté) */}
+      <div className="max-w-4xl w-full mx-auto text-center space-y-4 md:space-y-6 z-10">
         
-        {/* Cœur origami qui se plie */}
+        {/* Cœur origami */}
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
+          animate={{ opacity: 1, scale: 0.85 }}
           transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
-          className="flex justify-center mt-8 md:mt-0"
+          className="flex justify-center"
         >
           <div className="relative">
             <OrigamiHeart />
-            {/* Glow effect */}
             <div className="absolute inset-0 rounded-3xl bg-kontfeel-pink opacity-20 blur-3xl -z-10"></div>
           </div>
         </motion.div>
 
         {/* Titres */}
         <motion.div 
-          className="space-y-6"
-          initial={{ opacity: 0, y: 30 }}
+          className="space-y-3 md:space-y-4"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-6xl md:text-7xl font-bold tracking-tight leading-none">
-            <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              L'AMOUR
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-kontfeel-pink to-pink-400 bg-clip-text text-transparent">
-              DU MÉTIER
-            </span>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-none text-white">
+            L'AMOUR<br />
+            <span className="text-kontfeel-pink">DU MÉTIER</span>
           </h1>
 
-          <h2 className="text-2xl md:text-3xl font-semibold text-white">
+          <h2 className="text-xl md:text-2xl font-semibold text-white">
             Sommes-nous faits l'un pour l'autre ?
           </h2>
 
-          <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto font-light px-4">
             Le test de compatibilité pour ceux qui mettent du cœur à l'ouvrage.
           </p>
         </motion.div>
 
         {/* CTA Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="pt-6 pb-32 flex flex-col items-center gap-3"
+          className="pt-4 flex flex-col items-center gap-3"
         >
           <Button onClick={onStart}>
             LANCER LE TEST
           </Button>
-          <p className="text-sm text-white font-medium">
-            ⏱️ Moins d’une minute — promis.
+          <p className="text-xs md:text-sm text-white font-medium opacity-70 italic">
+            ⏱️ Moins d’une minute — promis !
           </p>
         </motion.div>
-
       </div>
-      {/* Logo en bas */}
-      <ExperienceFooter />
+
+      {/* 3. Ressort du bas (plus grand pour bien remonter le tout) */}
+      <div className="flex-grow-[2]" />
+
+      {/* 4. Footer bien espacé en bas */}
+      <div className="pb-8 w-full">
+        <ExperienceFooter variant="inline" />
+      </div>
     </div>
   );
 }

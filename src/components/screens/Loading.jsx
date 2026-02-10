@@ -7,11 +7,6 @@ function Loading({ onComplete }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const [finalScore, setFinalScore] = useState(0);
-
-  // ✅ Nouveau : pilotage de la scène
-  // "running" -> cercle normal
-  // "explode" -> cercle implose
-  // "showText" -> texte remplace le cercle
   const [stage, setStage] = useState("running");
   const [hasTriggeredEnd, setHasTriggeredEnd] = useState(false);
 
@@ -32,7 +27,7 @@ function Loading({ onComplete }) {
         }
         return Math.min(prev + 1, finalScore);
       });
-    }, 70);
+    }, 60);
 
     return () => clearInterval(progressInterval);
   }, [finalScore]);
@@ -58,7 +53,7 @@ function Loading({ onComplete }) {
 
     if (progress >= finalScore && !hasTriggeredEnd) {
       setHasTriggeredEnd(true);
-      setTimeout(() => setStage("explode"), 800);
+      setTimeout(() => setStage("explode"), 700);
     }
   }, [progress, finalScore, hasTriggeredEnd]);
 

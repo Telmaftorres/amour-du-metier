@@ -211,18 +211,6 @@ function Result({ answers, compatibilityScore }) {
                   </div>
                 </motion.a>
               </div>
-
-              <p className="text-center text-gray-400 text-xs mt-2">
-                Plus de réalisations sur{" "}
-                <a
-                  href="https://kontfeel.fr/realisations-plv"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-kontfeel-pink hover:underline"
-                >
-                  kontfeel.fr
-                </a>
-              </p>
             </motion.div>
           </div>
 
@@ -234,7 +222,7 @@ function Result({ answers, compatibilityScore }) {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <h2 className="text-xl font-bold text-white mb-3">
-              On se fait un date ?
+              N'attendez plus et partagez-nous votre test de compatibilité !
             </h2>
 
             {/* ✅ Affichage du % dans le formulaire */}
@@ -277,6 +265,16 @@ function Result({ answers, compatibilityScore }) {
                     className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors text-sm"
                   />
 
+                  <textarea
+                    name="message"
+                    placeholder="Ajouter un message d'amour"
+                    required
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="3"
+                    className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors text-sm resize-none"
+                  />
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -296,16 +294,12 @@ function Result({ answers, compatibilityScore }) {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
               >
-                <div className="text-5xl mb-3">🎉</div>
-                <h3 className="text-xl font-bold text-kontfeel-pink mb-2">
-                  Message reçu !
-                </h3>
-                <p className="text-gray-300 text-sm mb-1">
-                  On adore déjà votre projet !
-                </p>
-                <p className="text-gray-400 text-xs">
-                  Notre équipe vous contactera plus vite qu&apos;un découpage laser.
-                </p>
+               <p className="text-gray-300 text-sm mb-1">
+                    On a bien reçu votre déclaration !
+                  </p>
+                  <p className="text-gray-400 text-xs">
+                    Notre équipe revient vers vous avec des papillons dans les yeux (et des idées de PLV).
+                  </p>
 
                 <div className="mt-8 pt-6 border-t border-gray-700/50">
                   <ExperienceFooter />
