@@ -166,7 +166,7 @@ function Loading({ onComplete }) {
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   className="px-6"
                 >
-                  <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-kontfeel-pink to-pink-400 bg-clip-text text-transparent whitespace-nowrap">
+                  <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-kontfeel-pink to-pink-400 bg-clip-text text-transparent text-center leading-tight max-w-sm mx-auto md:max-w-none md:whitespace-nowrap">
                     {getMessage()}
                   </div>
                   <motion.div
