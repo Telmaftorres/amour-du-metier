@@ -130,7 +130,7 @@ function Result({ answers, compatibilityScore }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-4 md:py-2 relative">
+    <div className="min-h-screen flex items-center justify-center px-6 py-4 md:py-2 relative pb-20 md:pb-0">
       <motion.div
         className="max-w-7xl w-full"
         initial={{ opacity: 0, y: 20 }}

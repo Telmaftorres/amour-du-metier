@@ -81,7 +81,7 @@ function Loading({ onComplete }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 md:py-8 relative">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 md:py-8 relative pb-20 md:pb-0">
       <div className="text-center max-w-2xl w-full">
 
         {/* Cercle / Texte final */}
