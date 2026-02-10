@@ -216,7 +216,7 @@ function Result({ answers, compatibilityScore }) {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <h2 className="text-xl font-bold text-white mb-4">
-              Parlez-nous de votre projet...
+              On se fait un date ?
             </h2>
 
             {!isSubmitted ? (
