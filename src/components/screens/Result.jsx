@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import ExperienceFooter from "../ui/ExperienceFooter";
-import zidaneMeme from "../../assets/zidane-meme.png";
+import OrigamiHeart from '../ui/OrigamiHeart';
 
 
 function Result({ answers, compatibilityScore }) {
@@ -67,17 +67,17 @@ function Result({ answers, compatibilityScore }) {
   // Images des réalisations
   const realisations = [
     {
-      url: "https://www.kontfeel.fr/realisations-plv/arche-evenementielle-sur-mesure-pour-une-operation-de-noel",
+      url: "https://www.kontfeel.fr/realisations",
       image: "https://amour-du-metier.vercel.app/real1.jpg",
       title: "Arche événementielle"
     },
     {
-      url: "https://www.kontfeel.fr/realisations-plv/plv-vitrine-sur-les-champs-elysees-quand-delsey-reinvente-le-voyage-chez-monoprix",
+      url: "https://www.kontfeel.fr/realisations",
       image: "https://amour-du-metier.vercel.app/real2.jpg",
       title: "Vitrine Delsey"
     },
     {
-      url: "https://www.kontfeel.fr/realisations-plv/nos-secrets-pour-une_theatralisation-de-magasin-reussie",
+      url: "https://www.kontfeel.fr/realisations",
       image: "https://amour-du-metier.vercel.app/real3.jpg",
       title: "Théâtralisation"
     }
@@ -97,14 +97,10 @@ function Result({ answers, compatibilityScore }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
+
     try {
-      // On garde enrichedMessage pour avoir le texte formaté dans le champ "message"
-      const enrichedMessage =
-        `Compatibilité : ${compatibilityScore}%\n` +
-        `Profil : ${personalizedIntro}\n\n` +
-        `Message client : ${formData.message || "Aucun message"}`;
-  
+      // On envoie le message pur du client ici
+      // Le score et le profil seront envoyés dans des champs dédiés
       const res = await fetch("https://formspree.io/f/xykdzbqg", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -112,16 +108,22 @@ function Result({ answers, compatibilityScore }) {
           nom: formData.nom,
           email: formData.email,
           telephone: formData.telephone,
-          message: enrichedMessage, 
-          // ❌ On supprime les lignes 'score' et 'profil' ici pour éviter le doublon
+          message: formData.message, // Le texte libre du client
+          score_compatibilite: `${compatibilityScore}%`, // Champ dédié
+          profil_client: personalizedIntro, // Champ dédié
         }),
       });
-  
-      if (!res.ok) throw new Error("Erreur envoi");
-  
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error("Détails erreur Formspree:", errorData);
+        throw new Error("Erreur lors de l'envoi");
+      }
+
       setIsSubmitted(true);
     } catch (err) {
-      alert("Oups, l’envoi a échoué. Réessaie ou contacte-nous directement.");
+      console.error(err);
+      alert("Oups, l'envoi a échoué. Vérifiez votre connexion ou contactez-nous directement.");
     } finally {
       setIsSubmitting(false);
     }
@@ -177,7 +179,7 @@ function Result({ answers, compatibilityScore }) {
             >
               <h3 className="text-lg md:text-xl font-bold text-white mb-3 text-center">
                 Découvrez notre savoir-faire sur  <a
-                  href="https://kontfeel.fr/realisations-plv"
+                  href="https://kontfeel.fr/realisations"
                   target="_blank"
                   rel="noopener noreferrer"
                   className='text-kontfeel-pink'>
@@ -220,20 +222,20 @@ function Result({ answers, compatibilityScore }) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <h2 className="text-xl font-bold text-white mb-3">
-              N'attendez plus et partagez-nous votre test de compatibilité !
-            </h2>
-
-            {/* ✅ Affichage du % dans le formulaire */}
-            <div className="flex items-center justify-between bg-gray-700/60 border border-gray-600 rounded-xl px-4 py-3 mb-4">
-              <span className="text-gray-200 text-sm">Votre compatibilité</span>
-              <span className="text-kontfeel-pink font-bold text-sm">
-                {compatibilityScore}%
-              </span>
-            </div>
-
             {!isSubmitted ? (
               <>
+                <h2 className="text-xl font-bold text-white mb-3">
+                  Partagez-nous votre test de compatibilité !
+                </h2>
+
+                {/* ✅ Affichage du % dans le formulaire (uniquement avant envoi) */}
+                <div className="flex items-center justify-between bg-gray-700/60 border border-gray-600 rounded-xl px-4 py-3 mb-4">
+                  <span className="text-gray-200 text-sm">Votre compatibilité</span>
+                  <span className="text-kontfeel-pink font-bold text-sm">
+                    {compatibilityScore}%
+                  </span>
+                </div>
+
                 <form onSubmit={handleSubmit} className="space-y-3">
                   <input
                     type="text"
@@ -279,33 +281,45 @@ function Result({ answers, compatibilityScore }) {
                     disabled={isSubmitting}
                     className="w-full px-6 py-3 bg-kontfeel-pink text-white rounded-xl font-semibold hover:bg-opacity-90 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
-                    {isSubmitting ? "Envoi en cours..." : "Envoyer"}
+                    {isSubmitting ? "ENVOI EN COURS..." : "ENVOYER"}
                   </button>
                 </form>
-
-                <div className="mt-8">
-                  <ExperienceFooter variant="inline" />
-                </div>
               </>
             ) : (
               <motion.div
-                className="text-center py-8"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
+                className="text-center py-10"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
               >
-               <p className="text-gray-300 text-sm mb-1">
-                    On a bien reçu votre déclaration !
-                  </p>
-                  <p className="text-gray-400 text-xs">
-                    Notre équipe revient vers vous avec des papillons dans les yeux (et des idées de PLV).
-                  </p>
-
-                <div className="mt-8 pt-6 border-t border-gray-700/50">
-                  <ExperienceFooter />
+              {/* Cœur origami (version plus petite & parfaitement centré) */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.4 }}
+                animate={{ opacity: 1, scale: 0.6 }}
+                transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
+                className="flex justify-center"
+              >
+                <div className="relative w-40 h-40 flex items-center justify-center">
+                  <OrigamiHeart />
+                  <div className="absolute inset-0 rounded-3xl bg-kontfeel-pink opacity-20 blur-2xl -z-10"></div>
                 </div>
+              </motion.div>
+
+                <h3 className="text-2xl font-bold text-kontfeel-pink mb-5">
+                 C&apos;est envoyé !
+              </h3>
+
+            <p className="text-gray-300 text-ml max-w-sm mx-auto leading-relaxed">
+              Merci pour votre déclaration — on revient vers vous très vite avec des idées de PLV.
+            </p>
+
               </motion.div>
             )}
           </motion.div>
+
+        </div>
+        <div className="w-full mt-10 flex justify-center">
+          <ExperienceFooter />
         </div>
       </motion.div>
     </div>

@@ -16,18 +16,22 @@ function ExperienceFooter({ variant = "page", className = "" }) {
     >
       <div className="inline-flex flex-col items-center">
         
-        {/* Texte compact */}
-        <span className="text-[10px] md:text-[11px] text-gray-500 font-light uppercase tracking-[0.2em] leading-none">
+        {/* Texte rendu plus lisible :
+           - font-medium au lieu de font-light
+           - tracking-[0.1em] au lieu de 0.2em pour resserrer les lettres
+           - text-gray-600 pour un contraste un peu plus fort
+        */}
+        <span className="text-[11px] md:text-[12px] text-gray-400 font-medium uppercase tracking-[0.15em] leading-none">
           Une expérience
         </span>
 
         {/* Conteneur du logo */}
-        <div className="relative h-6 w-24 md:w-28 flex items-center justify-center overflow-visible">
+        <div className="relative h-7 w-20 md:w-24 flex items-center justify-center overflow-visible">
           <img
             src={logoImg}
             alt="Kontfeel"
-            className="opacity-90 w-full h-auto block transform scale-[1.3] origin-top" 
-            style={{ marginTop: "-4px" }} // On remonte le logo pour supprimer le vide du PNG
+            className="opacity-95 w-full h-auto block transform scale-[1.1] origin-top" 
+            style={{ marginTop: "4px" }} // Espace légèrement augmenté pour la lisibilité
           />
         </div>
 
