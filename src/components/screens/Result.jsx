@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import ExperienceFooter from "../ui/ExperienceFooter";
+import zidaneMeme from "../../assets/zidane-meme.png";
+
 
 function Result({ answers, compatibilityScore }) {
   const [formData, setFormData] = useState({
@@ -9,13 +11,14 @@ function Result({ answers, compatibilityScore }) {
     telephone: '',
     message: ''
   });
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Récupérer une phrase personnalisée depuis les réponses
   const getPersonalizedIntro = () => {
-    const answerValues = Object.values(answers);
-    if (answerValues.length > 0) {
+    const answerValues = Object.values(answers || {});
+    if (answerValues.length > 0 && answerValues[0]?.profile) {
       return answerValues[0].profile;
     }
     return "Vous avez du goût";
@@ -26,36 +29,37 @@ function Result({ answers, compatibilityScore }) {
       return (
         <>
           Vous ne cherchez pas un simple fournisseur, vous cherchez un{" "}
-          <strong className="font-semibold">partenaire</strong> qui partage votre vision.  
+          <strong className="font-semibold">partenaire</strong> qui partage votre vision.
           <br /><br />
-          Quelqu’un qui comprend que chaque <strong className="font-semibold">détail</strong> compte, que la <strong className="font-semibold">qualité</strong> n’est pas négociable, et que la beauté d’un projet se construit dans la passion du travail bien fait.
+          Quelqu’un qui comprend que chaque <strong className="font-semibold">détail</strong> compte,
+          que la <strong className="font-semibold">qualité</strong> n’est pas négociable,
+          et que la beauté d’un projet se construit dans la passion du travail bien fait.
         </>
       );
-    } 
-  
-    else if (compatibilityScore >= 90) {
+    } else if (compatibilityScore >= 90) {
       return (
         <>
-          Vous cherchez un <strong className="font-semibold">partenaire</strong> qui vibre autant que vous pour donner du volume à vos idées.  
+          Vous cherchez un <strong className="font-semibold">partenaire</strong> qui vibre autant que vous
+          pour donner du volume à vos idées.
           <br /><br />
-          Vous aimez quand c’est beau, quand c’est <strong className="font-semibold">bien pensé</strong>.  
+          Vous aimez quand c’est beau, quand c’est <strong className="font-semibold">bien pensé</strong>.
           <br /><br />
-          Ça tombe bien. Chez Kontfeel, notre moteur, c’est l’<strong className="font-semibold">amour du travail bien fait</strong> pour sublimer votre marque en magasin.
+          Ça tombe bien. Chez Kontfeel, notre moteur, c’est l’{" "}
+          <strong className="font-semibold">amour du travail bien fait</strong> pour sublimer votre marque en magasin.
         </>
       );
-    } 
-  
-    else {
+    } else {
       return (
         <>
-          Vous avez l’œil pour reconnaître la <strong className="font-semibold">qualité</strong> et vous savez que derrière chaque belle PLV se cache un <strong className="font-semibold">vrai savoir-faire</strong>.  
+          Vous avez l’œil pour reconnaître la <strong className="font-semibold">qualité</strong> et vous savez
+          que derrière chaque belle PLV se cache un <strong className="font-semibold">vrai savoir-faire</strong>.
           <br /><br />
-          Chez Kontfeel, nous mettons notre <strong className="font-semibold">passion</strong> au service de vos projets pour créer des présentoirs qui ne laissent personne indifférent.
+          Chez Kontfeel, nous mettons notre <strong className="font-semibold">passion</strong> au service de vos projets
+          pour créer des présentoirs qui ne laissent personne indifférent.
         </>
       );
     }
   };
-  
 
   const personalizedIntro = getPersonalizedIntro();
   const mainMessage = getMainMessage();
@@ -93,8 +97,14 @@ function Result({ answers, compatibilityScore }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
+
     try {
+      // ✅ On enrichit le message pour que le % apparaisse clairement dans l’email
+      const enrichedMessage =
+        `Compatibilité : ${compatibilityScore}%\n` +
+        `Profil : ${personalizedIntro}\n\n` +
+        `${formData.message || ""}`;
+
       const res = await fetch("https://formspree.io/f/xykdzbqg", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -102,20 +112,21 @@ function Result({ answers, compatibilityScore }) {
           nom: formData.nom,
           email: formData.email,
           telephone: formData.telephone,
-          message: formData.message,
+          message: enrichedMessage,
           score: compatibilityScore,
+          profil: personalizedIntro,
         }),
       });
-  
+
       if (!res.ok) throw new Error("Erreur envoi");
-  
+
       setIsSubmitted(true);
     } catch (err) {
       alert("Oups, l’envoi a échoué. Réessaie ou contacte-nous directement.");
     } finally {
       setIsSubmitting(false);
     }
-  };  
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-4 md:py-2 relative">
@@ -131,9 +142,9 @@ function Result({ answers, compatibilityScore }) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-        >
+        >      
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-            Nous sommes compatibles à{' '}
+            Nous sommes compatibles à{" "}
             <span className="text-kontfeel-pink">{compatibilityScore}%</span> !!!
           </h1>
 
@@ -157,6 +168,7 @@ function Result({ answers, compatibilityScore }) {
                 {mainMessage}
               </p>
             </motion.div>
+
             {/* RÉALISATIONS */}
             <motion.div
               className="mt-auto"
@@ -165,37 +177,43 @@ function Result({ answers, compatibilityScore }) {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <h3 className="text-lg md:text-xl font-bold text-white mb-3 text-center">
-                Découvrez notre savoir-faire
+                Découvrez notre savoir-faire sur  <a
+                  href="https://kontfeel.fr/realisations-plv"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className='text-kontfeel-pink'>
+                  kontfeel.fr
+                  </a>
               </h3>
 
               <div className="flex justify-center">
-              <motion.a
-                href={selectedRealizations[0].url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative block overflow-hidden rounded-2xl bg-gray-800 w-full max-w-md h-48 md:h-56"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-                whileHover={{ scale: 1.03 }}
-              >
-                <img
-                  src={selectedRealizations[0].image}
-                  alt={selectedRealizations[0].title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-kontfeel-navy via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
-                    <p className="text-white font-semibold text-sm">
-                      {selectedRealizations[0].title}
-                    </p>
+                <motion.a
+                  href={selectedRealizations[0].url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative block overflow-hidden rounded-2xl bg-gray-800 w-full max-w-md h-48 md:h-56"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                  whileHover={{ scale: 1.03 }}
+                >
+                  <img
+                    src={selectedRealizations[0].image}
+                    alt={selectedRealizations[0].title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-kontfeel-navy via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
+                      <p className="text-white font-semibold text-sm">
+                        {selectedRealizations[0].title}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </motion.a>
-            </div>
+                </motion.a>
+              </div>
 
               <p className="text-center text-gray-400 text-xs mt-2">
-                Plus de réalisations sur{' '}
+                Plus de réalisations sur{" "}
                 <a
                   href="https://kontfeel.fr/realisations-plv"
                   target="_blank"
@@ -215,9 +233,17 @@ function Result({ answers, compatibilityScore }) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <h2 className="text-xl font-bold text-white mb-4">
+            <h2 className="text-xl font-bold text-white mb-3">
               On se fait un date ?
             </h2>
+
+            {/* ✅ Affichage du % dans le formulaire */}
+            <div className="flex items-center justify-between bg-gray-700/60 border border-gray-600 rounded-xl px-4 py-3 mb-4">
+              <span className="text-gray-200 text-sm">Votre compatibilité</span>
+              <span className="text-kontfeel-pink font-bold text-sm">
+                {compatibilityScore}%
+              </span>
+            </div>
 
             {!isSubmitted ? (
               <>
@@ -251,25 +277,15 @@ function Result({ answers, compatibilityScore }) {
                     className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors text-sm"
                   />
 
-                  <textarea
-                    name="message"
-                    placeholder="Parlez-nous de votre projet..."
-                    rows="3"
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2.5 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-kontfeel-pink focus:outline-none transition-colors resize-none text-sm"
-                  />
-
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full px-6 py-3 bg-kontfeel-pink text-white rounded-xl font-semibold hover:bg-opacity-90 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
-                    {isSubmitting ? 'Envoi en cours...' : 'Envoyer'}
+                    {isSubmitting ? "Envoi en cours..." : "Envoyer"}
                   </button>
                 </form>
 
-                {/* Descend un peu le footer, tout en restant DANS le cadre */}
                 <div className="mt-8">
                   <ExperienceFooter variant="inline" />
                 </div>
@@ -288,10 +304,9 @@ function Result({ answers, compatibilityScore }) {
                   On adore déjà votre projet !
                 </p>
                 <p className="text-gray-400 text-xs">
-                  Notre équipe vous contactera plus vite qu'un découpage laser.
+                  Notre équipe vous contactera plus vite qu&apos;un découpage laser.
                 </p>
 
-                {/* Footer aussi dans l'état "message reçu" */}
                 <div className="mt-8 pt-6 border-t border-gray-700/50">
                   <ExperienceFooter />
                 </div>

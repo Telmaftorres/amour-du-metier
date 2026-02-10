@@ -55,11 +55,14 @@ function Welcome({ onStart }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="pt-6 pb-32"
+          className="pt-6 pb-32 flex flex-col items-center gap-3"
         >
           <Button onClick={onStart}>
             LANCER LE TEST
           </Button>
+          <p className="text-sm text-white font-medium">
+            ⏱️ Moins d’une minute — promis.
+          </p>
         </motion.div>
 
       </div>

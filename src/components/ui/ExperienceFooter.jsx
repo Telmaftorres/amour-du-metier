@@ -16,17 +16,33 @@ function ExperienceFooter({ variant = "page", className = "" }) {
       animate={{ opacity: 1 }}
       transition={{ duration: 1, delay: isInline ? 0 : 1 }}
     >
-      <p className="text-sm md:text-base text-gray-500 font-light flex items-center justify-center gap-2">
-        Une expérience
-        <img
-          src={logoImg}
-          alt="Kontfeel"
-          className={isInline ? "h-10 md:h-12 w-auto opacity-80" : "h-14 md:h-16 w-auto opacity-80"}
-        />
-      </p>
+      <div className="inline-flex items-center justify-center">
+        <span className="text-sm md:text-base text-gray-500 font-light">
+          Une expérience
+        </span>
+
+        {/* Conteneur serré pour “rogner” le vide éventuel du PNG */}
+        <span className="inline-flex items-center overflow-hidden ml-1">
+          <img
+            src={logoImg}
+            alt="Kontfeel"
+            className={[
+              "opacity-80 w-auto",
+              isInline ? "h-10 md:h-12" : "h-14 md:h-16",
+            ].join(" ")}
+          />
+        </span>
+      </div>
     </motion.div>
   );
 }
 
 export default ExperienceFooter;
+
+
+
+
+
+
+
 
