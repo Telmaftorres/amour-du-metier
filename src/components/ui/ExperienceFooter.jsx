@@ -9,7 +9,7 @@ function ExperienceFooter({ variant = "page", className = "" }) {
       className={[
         isInline
             ? "w-full text-center px-4"
-            : "fixed bottom-3 inset-x-0 text-center w-full px-4 z-50 md:absolute md:bottom-6 md:z-auto"
+            : "fixed inset-x-0 bottom-4 text-center w-full px-4 z-50 pointer-events-none md:pointer-events-auto md:absolute md:bottom-6 md:z-auto"
             ,
         className,
       ].join(" ")}
