@@ -137,4 +137,3 @@ function Quiz({ onComplete }) {
 }
 
 export default Quiz;
-
