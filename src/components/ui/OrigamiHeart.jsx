@@ -7,10 +7,11 @@ function OrigamiHeart() {
       
       {/* Glow derrière */}
       <motion.div
-        className="absolute inset-0 bg-kontfeel-pink rounded-full blur-3xl opacity-30 -z-10"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+        className="absolute inset-8 bg-kontfeel-pink rounded-full blur-2xl opacity-30 -z-10"
+        animate={{ scale: [0.95, 1.1, 0.95], opacity: [0.18, 0.32, 0.18] }}
         transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
       />
+
 
       {/* Coeur */}
       <motion.img
