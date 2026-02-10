@@ -95,7 +95,7 @@ function Result({ answers, compatibilityScore }) {
     setIsSubmitting(true);
   
     try {
-      const res = await fetch("https://formspree.io/f/XXXXXXXX", {
+      const res = await fetch("https://formspree.io/f/xykdzbqg", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
