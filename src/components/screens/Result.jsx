@@ -97,14 +97,14 @@ function Result({ answers, compatibilityScore }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
+  
     try {
-      // ✅ On enrichit le message pour que le % apparaisse clairement dans l’email
+      // On garde enrichedMessage pour avoir le texte formaté dans le champ "message"
       const enrichedMessage =
         `Compatibilité : ${compatibilityScore}%\n` +
         `Profil : ${personalizedIntro}\n\n` +
-        `${formData.message || ""}`;
-
+        `Message client : ${formData.message || "Aucun message"}`;
+  
       const res = await fetch("https://formspree.io/f/xykdzbqg", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -112,14 +112,13 @@ function Result({ answers, compatibilityScore }) {
           nom: formData.nom,
           email: formData.email,
           telephone: formData.telephone,
-          message: enrichedMessage,
-          score: compatibilityScore,
-          profil: personalizedIntro,
+          message: enrichedMessage, 
+          // ❌ On supprime les lignes 'score' et 'profil' ici pour éviter le doublon
         }),
       });
-
+  
       if (!res.ok) throw new Error("Erreur envoi");
-
+  
       setIsSubmitted(true);
     } catch (err) {
       alert("Oups, l’envoi a échoué. Réessaie ou contacte-nous directement.");
