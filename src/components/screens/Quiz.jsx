@@ -38,7 +38,7 @@ function Quiz({ onComplete }) {
   return (
     <div className="min-h-screen flex flex-col px-4 py-8 md:py-12">
       <Helmet>
-        <title>Question {currentQuestion + 1} - Amour du Métier</title>
+        <title>{`Question ${currentQuestion + 1} - Amour du Métier`}</title>
       </Helmet>
       <div className="max-w-3xl w-full mx-auto flex-grow">
         {/* Indicateur de progression */}
