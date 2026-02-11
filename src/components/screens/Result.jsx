@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import ReactGA from 'react-ga4';
 import ExperienceFooter from "../ui/ExperienceFooter";
 import OrigamiHeart from '../ui/OrigamiHeart';
+import { realisations } from '../../data/realisations';
+import { getMainMessage } from '../../utils/resultHelpers';
 
 
 function Result({ answers, compatibilityScore }) {
@@ -25,64 +28,8 @@ function Result({ answers, compatibilityScore }) {
     return "Vous avez du goût";
   };
 
-  const getMainMessage = () => {
-    if (compatibilityScore >= 95) {
-      return (
-        <>
-          Vous ne cherchez pas un simple fournisseur, vous cherchez un{" "}
-          <strong className="font-semibold">partenaire</strong> qui partage votre vision.
-          <br /><br />
-          Quelqu’un qui comprend que chaque <strong className="font-semibold">détail</strong> compte,
-          que la <strong className="font-semibold">qualité</strong> n’est pas négociable,
-          et que la beauté d’un projet se construit dans la passion du travail bien fait.
-        </>
-      );
-    } else if (compatibilityScore >= 90) {
-      return (
-        <>
-          Vous cherchez un <strong className="font-semibold">partenaire</strong> qui vibre autant que vous
-          pour donner du volume à vos idées.
-          <br /><br />
-          Vous aimez quand c’est beau, quand c’est <strong className="font-semibold">bien pensé</strong>.
-          <br /><br />
-          Ça tombe bien. Chez Kontfeel, notre moteur, c’est l’{" "}
-          <strong className="font-semibold">amour du travail bien fait</strong> pour sublimer votre marque en magasin.
-        </>
-      );
-    } else {
-      return (
-        <>
-          Vous avez l’œil pour reconnaître la <strong className="font-semibold">qualité</strong> et vous savez
-          que derrière chaque belle PLV se cache un <strong className="font-semibold">vrai savoir-faire</strong>.
-          <br /><br />
-          Chez Kontfeel, nous mettons notre <strong className="font-semibold">passion</strong> au service de vos projets
-          pour créer des présentoirs qui ne laissent personne indifférent.
-        </>
-      );
-    }
-  };
-
   const personalizedIntro = getPersonalizedIntro();
-  const mainMessage = getMainMessage();
-
-  // Images des réalisations
-  const realisations = [
-    {
-      url: "https://www.kontfeel.fr/realisations",
-      image: "https://amour-du-metier.vercel.app/real1.jpg",
-      title: "Arche événementielle"
-    },
-    {
-      url: "https://www.kontfeel.fr/realisations",
-      image: "https://amour-du-metier.vercel.app/real2.jpg",
-      title: "Vitrine Delsey"
-    },
-    {
-      url: "https://www.kontfeel.fr/realisations",
-      image: "https://amour-du-metier.vercel.app/real3.jpg",
-      title: "Théâtralisation"
-    }
-  ];
+  const mainMessage = getMainMessage(compatibilityScore);
 
   // Sélectionner 2 réalisations aléatoires
   const shuffled = [...realisations].sort(() => 0.5 - Math.random());
@@ -100,6 +47,13 @@ function Result({ answers, compatibilityScore }) {
     setIsSubmitting(true);
 
     try {
+      // Extraction des paramètres UTM de l'URL
+      const searchParams = new URLSearchParams(window.location.search);
+      const utmSource = searchParams.get('utm_source') || 'Direct';
+      const utmMedium = searchParams.get('utm_medium') || '-';
+      const utmCampaign = searchParams.get('utm_campaign') || '-';
+      const utmContent = searchParams.get('utm_content') || '-';
+
       // On envoie le message pur du client ici
       // Le score et le profil seront envoyés dans des champs dédiés
       const res = await fetch("https://formspree.io/f/xykdzbqg", {
@@ -112,6 +66,11 @@ function Result({ answers, compatibilityScore }) {
           message: formData.message, // Le texte libre du client
           score_compatibilite: `${compatibilityScore}%`, // Champ dédié
           profil_client: personalizedIntro, // Champ dédié
+          // Infos de tracking ajoutées automatiquement
+          source: utmSource,
+          medium: utmMedium,
+          campagne: utmCampaign,
+          contenu: utmContent, // Utile pour l'A/B testing (Version A ou B)
         }),
       });
 
@@ -132,6 +91,10 @@ function Result({ answers, compatibilityScore }) {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-4 md:py-2 relative pb-20 md:pb-0">
+      <Helmet>
+        <title>Vos Résultats - Amour du Métier</title>
+        <meta name="description" content={`Découvrez votre compatibilité avec l'amour du travail bien fait. Score : ${compatibilityScore}%`} />
+      </Helmet>
       <motion.div
         className="max-w-7xl w-full"
         initial={{ opacity: 0, y: 20 }}

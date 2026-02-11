@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import Button from '../ui/Button';
 import OrigamiHeart from '../ui/OrigamiHeart';
 import ExperienceFooter from "../ui/ExperienceFooter";
@@ -6,6 +7,10 @@ import ExperienceFooter from "../ui/ExperienceFooter";
 function Welcome({ onStart }) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-between px-8 py-8">
+      <Helmet>
+        <title>Amour du Métier - Test de compatibilité</title>
+        <meta name="description" content="Sommes-nous faits l'un pour l'autre ? Faites le test de compatibilité Kontfeel." />
+      </Helmet>
       {/* Contenu principal - centré avec padding réduit */}
       <div className="w-full flex-1 flex items-center justify-center">
         <div className="max-w-4xl w-full mx-auto text-center space-y-2 md:space-y-3 -mt-20 md:-mt-28">

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import { quizQuestions } from '../../data/questions';
 import Button from '../ui/Button';
 import ExperienceFooter from "../ui/ExperienceFooter";
@@ -36,6 +37,9 @@ function Quiz({ onComplete }) {
 
   return (
     <div className="min-h-screen flex flex-col px-4 py-8 md:py-12">
+      <Helmet>
+        <title>Question {currentQuestion + 1} - Amour du Métier</title>
+      </Helmet>
       <div className="max-w-3xl w-full mx-auto flex-grow">
         {/* Indicateur de progression */}
         <div className="mb-12">
