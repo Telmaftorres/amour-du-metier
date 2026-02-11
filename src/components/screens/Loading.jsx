@@ -11,7 +11,6 @@ function Loading({ onComplete }) {
   const [hasTriggeredEnd, setHasTriggeredEnd] = useState(false);
 
   useEffect(() => {
-    // ⚠️ inchangé (ta plage actuelle)
     const randomScore = Math.floor(Math.random() * (98 - 86 + 1)) + 86;
     setFinalScore(randomScore);
   }, []);
@@ -32,7 +31,6 @@ function Loading({ onComplete }) {
     return () => clearInterval(progressInterval);
   }, [finalScore]);
 
-  // Steps (inchangé dans l’esprit)
   useEffect(() => {
     if (!finalScore) return;
 
@@ -47,7 +45,6 @@ function Loading({ onComplete }) {
     }
   }, [progress, finalScore, currentStep]);
 
-  // ✅ Déclenchement de la séquence finale (sans dépendre des steps)
   useEffect(() => {
     if (!finalScore) return;
 
@@ -57,19 +54,16 @@ function Loading({ onComplete }) {
     }
   }, [progress, finalScore, hasTriggeredEnd]);
 
-  // Message final (inchangé)
   const getMessage = () => {
     if (progress >= 95) return "Coup de foudre professionnel !";
     if (progress >= 90) return "Match parfait !";
     return "Excellente compatibilité !";
   };
 
-  // Cercle SVG (inchangé)
   const radius = 100;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
-  // Variants pour l’implosion
   const circleVariants = {
     running: { opacity: 1, scale: 1, rotate: 0 },
     explode: {
@@ -81,8 +75,9 @@ function Loading({ onComplete }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 md:py-8 relative pb-20 md:pb-0">
-      <div className="text-center max-w-2xl w-full md:-mt-6">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8 md:py-12">
+      {/* Contenu principal centré */}
+      <div className="text-center max-w-2xl w-full flex-grow flex flex-col justify-center">
         {/* Cercle / Texte final */}
         <div className="flex justify-center mb-4">
           <div className="relative w-80 h-80 flex items-center justify-center">
@@ -95,18 +90,15 @@ function Loading({ onComplete }) {
                   initial="running"
                   animate={stage === "explode" ? "explode" : "running"}
                   onAnimationComplete={() => {
-                    // ✅ Quand l’implosion du cercle est terminée → on affiche le texte
                     if (stage === "explode") {
                       setStage("showText");
-
-                      // ✅ Laisse le texte visible un moment, puis on continue
                       setTimeout(() => {
                         onComplete(finalScore);
                       }, 2000);
                     }
                   }}
                 >
-                  {/* Flash pendant l’implosion */}
+                  {/* Flash pendant l'implosion */}
                   {stage === "explode" && (
                     <motion.div
                       className="absolute inset-0 rounded-full"
@@ -183,7 +175,7 @@ function Loading({ onComplete }) {
           </div>
         </div>
 
-        {/* ✅ MOBILE : une phrase à la fois */}
+        {/* MOBILE : une phrase à la fois */}
         <div className="md:hidden mt-6">
           <AnimatePresence mode="wait">
             <motion.div
@@ -204,7 +196,7 @@ function Loading({ onComplete }) {
           <div className="mt-3 text-xs text-gray-500">Analyse en cours…</div>
         </div>
 
-        {/* ✅ DESKTOP : liste complète */}
+        {/* DESKTOP : liste complète */}
         <div className="hidden md:block">
           <h2 className="text-3xl font-bold mb-4">Analyse en cours...</h2>
 
@@ -232,12 +224,13 @@ function Loading({ onComplete }) {
         </div>
       </div>
 
-      {/* Footer en bas */}
-      <ExperienceFooter />
+      {/* Footer toujours en bas */}
+      <div className="w-full mt-auto">
+        <ExperienceFooter />
+      </div>
     </div>
   );
 }
 
 export default Loading;
-
 

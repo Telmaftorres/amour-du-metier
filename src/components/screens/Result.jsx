@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import ReactGA from 'react-ga4';
 import ExperienceFooter from "../ui/ExperienceFooter";
 import OrigamiHeart from '../ui/OrigamiHeart';
 

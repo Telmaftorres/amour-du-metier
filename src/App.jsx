@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import ReactGA from 'react-ga4';
 import Welcome from './components/screens/Welcome';
 import Quiz from './components/screens/Quiz';
 import Loading from './components/screens/Loading';

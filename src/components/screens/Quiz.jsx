@@ -12,7 +12,6 @@ function Quiz({ onComplete }) {
   const isLastQuestion = currentQuestion === quizQuestions.length - 1;
   const hasAnswer = answers[question.id] !== undefined;
 
-  // Quand on sélectionne une réponse
   const handleSelectAnswer = (answerId, profile) => {
     setAnswers({
       ...answers,
@@ -20,10 +19,8 @@ function Quiz({ onComplete }) {
     });
   };
 
-  // Question suivante
   const handleNext = () => {
     if (!hasAnswer) return;
-
     if (isLastQuestion) {
       onComplete(answers);
     } else {
@@ -31,7 +28,6 @@ function Quiz({ onComplete }) {
     }
   };
 
-  // Question précédente
   const handlePrevious = () => {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
@@ -39,9 +35,8 @@ function Quiz({ onComplete }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative pb-28 md:pb-0">
-      <div className="max-w-3xl w-full">
-
+    <div className="min-h-screen flex flex-col px-4 py-8 md:py-12">
+      <div className="max-w-3xl w-full mx-auto flex-grow">
         {/* Indicateur de progression */}
         <div className="mb-12">
           <div className="flex justify-end items-center mb-4">
@@ -50,7 +45,7 @@ function Quiz({ onComplete }) {
             </span>
           </div>
 
-          {/* Barre de progression simple */}
+          {/* Barre de progression */}
           <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
             <motion.div
               className="h-full bg-white rounded-full"
@@ -105,7 +100,7 @@ function Quiz({ onComplete }) {
         </AnimatePresence>
 
         {/* Boutons de navigation */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-8">
           <button
             onClick={handlePrevious}
             disabled={currentQuestion === 0}
@@ -126,11 +121,12 @@ function Quiz({ onComplete }) {
             {isLastQuestion ? 'VOIR LE RÉSULTAT' : 'SUIVANT →'}
           </Button>
         </div>
-
       </div>
-   
-      {/* Footer en bas */}
-      <ExperienceFooter />
+
+      {/* Footer toujours en bas */}
+      <div className="w-full mt-auto">
+        <ExperienceFooter />
+      </div>
     </div>
   );
 }
