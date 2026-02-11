@@ -13,13 +13,13 @@ function Welcome({ onStart }) {
       </Helmet>
       {/* Contenu principal - centré avec padding réduit */}
       <div className="w-full flex-1 flex items-center justify-center">
-        <div className="max-w-4xl w-full mx-auto text-center space-y-2 md:space-y-3 -mt-20 md:-mt-28">
+        <div className="max-w-4xl w-full mx-auto text-center -mt-20 md:-mt-28 relative z-10">
           {/* Cœur origami - plus grand et plus d'espace en dessous */}
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 0.8 }}
             transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
-            className="flex justify-center mb-1 md:mb-2"
+            className="flex justify-center -mb-6 md:-mb-8 relative z-20"
           >
             <div className="relative">
               <OrigamiHeart />
