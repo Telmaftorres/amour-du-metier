@@ -131,9 +131,9 @@ function Result({ answers, compatibilityScore }) {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-center"
             >
-              <p className="text-sm md:text-base text-gray-200 leading-relaxed max-w-xl mx-auto">
+              <div className="text-sm md:text-base text-gray-200 leading-relaxed max-w-xl mx-auto space-y-4">
                 {mainMessage}
-              </p>
+              </div>
             </motion.div>
 
             {/* RÉALISATIONS */}
