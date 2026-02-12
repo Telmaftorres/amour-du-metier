@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import ReactGA from 'react-ga4';
@@ -31,9 +31,11 @@ function Result({ answers, compatibilityScore }) {
   const personalizedIntro = getPersonalizedIntro();
   const mainMessage = getMainMessage(compatibilityScore);
 
-  // Sélectionner 2 réalisations aléatoires
-  const shuffled = [...realisations].sort(() => 0.5 - Math.random());
-  const selectedRealizations = shuffled.slice(0, 2);
+  // Sélectionner 2 réalisations aléatoires (mémoïsé pour éviter le changement à chaque frappe)
+  const selectedRealizations = useMemo(() => {
+    const shuffled = [...realisations].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 2);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
